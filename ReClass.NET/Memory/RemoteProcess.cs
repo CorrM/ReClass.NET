@@ -104,7 +104,7 @@ namespace ReClassNET.Memory
 
 		/// <summary>Opens the given process to gather informations from.</summary>
 		/// <param name="info">The process information.</param>
-		public void Open(ProcessInfo info)
+		public void Open(ProcessInfo info, bool UseKernal)
 		{
 			Contract.Requires(info != null);
 
@@ -118,7 +118,7 @@ namespace ReClassNET.Memory
 
 					process = info;
 
-					handle = coreFunctions.OpenRemoteProcess(process.Id, ProcessAccess.Full);
+					handle = coreFunctions.OpenRemoteProcess(process.Id, ProcessAccess.Full, UseKernal, true);
 				}
 
 				ProcessAttached?.Invoke(this);
@@ -136,7 +136,7 @@ namespace ReClassNET.Memory
 				{
 					debugger.Terminate();
 
-					coreFunctions.CloseRemoteProcess(handle);
+					coreFunctions.CloseRemoteProcess(handle, (uint)process.Id.ToInt32());
 
 					handle = IntPtr.Zero;
 

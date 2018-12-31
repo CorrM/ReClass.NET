@@ -18,9 +18,9 @@ namespace ReClassNET.Core
 		[return: MarshalAs(UnmanagedType.I1)]
 		private delegate bool IsProcessValidDelegate(IntPtr process);
 
-		private delegate IntPtr OpenRemoteProcessDelegate(IntPtr pid, ProcessAccess desiredAccess);
+		private delegate IntPtr OpenRemoteProcessDelegate(IntPtr pid, ProcessAccess desiredAccess, bool UseKernal, bool IsTargetProcess);
 
-		private delegate void CloseRemoteProcessDelegate(IntPtr process);
+		private delegate void CloseRemoteProcessDelegate(IntPtr process, uint targetProcessID);
 
 		[return: MarshalAs(UnmanagedType.I1)]
 		private delegate bool ReadRemoteMemoryDelegate(IntPtr process, IntPtr address, [Out] byte[] buffer, int offset, int size);
@@ -101,9 +101,9 @@ namespace ReClassNET.Core
 			enumerateRemoteSectionsAndModulesDelegate(process, callbackSection, callbackModule);
 		}
 
-		public IntPtr OpenRemoteProcess(IntPtr pid, ProcessAccess desiredAccess)
+		public IntPtr OpenRemoteProcess(IntPtr pid, ProcessAccess desiredAccess, bool UseKernal, bool IsTargetProcess)
 		{
-			return openRemoteProcessDelegate(pid, desiredAccess);
+			return openRemoteProcessDelegate(pid, desiredAccess, UseKernal, IsTargetProcess);
 		}
 
 		public bool IsProcessValid(IntPtr process)
@@ -111,9 +111,9 @@ namespace ReClassNET.Core
 			return isProcessValidDelegate(process);
 		}
 
-		public void CloseRemoteProcess(IntPtr process)
+		public void CloseRemoteProcess(IntPtr process, uint targetProcessID)
 		{
-			closeRemoteProcessDelegate(process);
+			closeRemoteProcessDelegate(process, targetProcessID);
 		}
 
 		public bool ReadRemoteMemory(IntPtr process, IntPtr address, ref byte[] buffer, int offset, int size)

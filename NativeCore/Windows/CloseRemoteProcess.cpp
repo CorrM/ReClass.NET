@@ -1,13 +1,13 @@
 #include <windows.h>
 
+#include "Program.h"
 #include "NativeCore.hpp"
 
-void RC_CallConv CloseRemoteProcess(RC_Pointer handle)
+void RC_CallConv CloseRemoteProcess(RC_Pointer handle, DWORD targetProcessID)
 {
-	if (handle == nullptr)
-	{
-		return;
-	}
+	if (handle != nullptr)
+		CloseHandle(handle);
 
-	CloseHandle(handle);
+	if (ByPass != nullptr && ByPass->pID == targetProcessID)
+		delete ByPass;
 }

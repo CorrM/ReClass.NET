@@ -64,6 +64,15 @@
     <ClCompile Include="..\Shared\DistormHelper.cpp">
       <Filter>Shared</Filter>
     </ClCompile>
+    <ClCompile Include="..\BypaPH\Driver.cpp">
+      <Filter>BypaPH</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BypaPH\KProcessHacker.cpp">
+      <Filter>BypaPH</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BypaPH\Tools.cpp">
+      <Filter>BypaPH</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="exports.def" />
@@ -81,9 +90,25 @@
     <Filter Include="Shared">
       <UniqueIdentifier>{faf06b55-02ad-4707-a65d-37e1c0d13640}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BypaPH">
+      <UniqueIdentifier>{9162fbc2-f5c4-4a5d-8253-a7a6f9f82d03}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NativeCore.hpp" />
     <ClInclude Include="..\ReClassNET_Plugin.hpp" />
+    <ClInclude Include="..\BypaPH\BypaPH.h">
+      <Filter>BypaPH</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BypaPH\Driver.h">
+      <Filter>BypaPH</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BypaPH\KProcessHacker.h">
+      <Filter>BypaPH</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BypaPH\Tools.h">
+      <Filter>BypaPH</Filter>
+    </ClInclude>
+    <ClInclude Include="Program.h" />
   </ItemGroup>
 </Project>

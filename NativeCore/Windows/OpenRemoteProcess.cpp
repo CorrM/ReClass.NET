@@ -1,9 +1,14 @@
 #include <windows.h>
 
+#include "Program.h"
 #include "NativeCore.hpp"
 
-RC_Pointer RC_CallConv OpenRemoteProcess(RC_Pointer id, ProcessAccess desiredAccess)
+BypaPH *ByPass = nullptr;
+
+RC_Pointer RC_CallConv OpenRemoteProcess(RC_Pointer id, ProcessAccess desiredAccess, bool useKernal, bool isTargetProcess)
 {
+	DWORD pID = static_cast<DWORD>(reinterpret_cast<size_t>(id));
+
 	DWORD access = STANDARD_RIGHTS_REQUIRED | PROCESS_TERMINATE | PROCESS_QUERY_INFORMATION | SYNCHRONIZE;
 	switch (desiredAccess)
 	{
@@ -18,12 +23,12 @@ RC_Pointer RC_CallConv OpenRemoteProcess(RC_Pointer id, ProcessAccess desiredAcc
 			break;
 	}
 
-	const auto handle = OpenProcess(access, FALSE, static_cast<DWORD>(reinterpret_cast<size_t>(id)));
+	if (isTargetProcess && useKernal)
+		ByPass = new BypaPH(pID);
 
+	const auto handle = OpenProcess(access, FALSE, pID);
 	if (handle == nullptr || handle == INVALID_HANDLE_VALUE)
-	{
 		return nullptr;
-	}
 
 	return handle;
 }

@@ -124,9 +124,9 @@ namespace ReClassNET.Core
 			EnumerateRemoteSectionsAndModules(process, sections.Add, modules.Add);
 		}
 
-		public IntPtr OpenRemoteProcess(IntPtr pid, ProcessAccess desiredAccess)
+		public IntPtr OpenRemoteProcess(IntPtr pid, ProcessAccess desiredAccess, bool UseKernal = false, bool IsTargetProcess = false)
 		{
-			return currentFunctions.OpenRemoteProcess(pid, desiredAccess);
+			return currentFunctions.OpenRemoteProcess(pid, desiredAccess, UseKernal, IsTargetProcess);
 		}
 
 		public bool IsProcessValid(IntPtr process)
@@ -134,9 +134,9 @@ namespace ReClassNET.Core
 			return currentFunctions.IsProcessValid(process);
 		}
 
-		public void CloseRemoteProcess(IntPtr process)
+		public void CloseRemoteProcess(IntPtr process, uint targetProcessID)
 		{
-			currentFunctions.CloseRemoteProcess(process);
+			currentFunctions.CloseRemoteProcess(process, targetProcessID);
 		}
 
 		public bool ReadRemoteMemory(IntPtr process, IntPtr address, ref byte[] buffer, int offset, int size)

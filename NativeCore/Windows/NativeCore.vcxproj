@@ -22,14 +22,14 @@
     <ProjectGuid>{22CA6FDB-7622-4F94-8FC2-2E7AB481C86F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NativeCore</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -104,6 +104,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;NATIVECORE_EXPORTS;_CRT_SECURE_NO_WARNINGS;NOMINMAX;RECLASSNET32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <OmitFramePointers />
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -166,6 +167,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\BypaPH\Driver.cpp" />
+    <ClCompile Include="..\BypaPH\KProcessHacker.cpp" />
+    <ClCompile Include="..\BypaPH\Tools.cpp" />
     <ClCompile Include="..\Dependencies\distorm\src\decoder.c" />
     <ClCompile Include="..\Dependencies\distorm\src\distorm.c" />
     <ClCompile Include="..\Dependencies\distorm\src\instructions.c" />
@@ -192,8 +196,13 @@
     <None Include="exports.def" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\BypaPH\BypaPH.h" />
+    <ClInclude Include="..\BypaPH\Driver.h" />
+    <ClInclude Include="..\BypaPH\KProcessHacker.h" />
+    <ClInclude Include="..\BypaPH\Tools.h" />
     <ClInclude Include="..\ReClassNET_Plugin.hpp" />
     <ClInclude Include="NativeCore.hpp" />
+    <ClInclude Include="Program.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,9 +6,9 @@
 void RC_CallConv EnumerateProcesses(EnumerateProcessCallback callbackProcess);
 void RC_CallConv EnumerateRemoteSectionsAndModules(RC_Pointer handle, EnumerateRemoteSectionsCallback callbackSection, EnumerateRemoteModulesCallback callbackModule);
 
-RC_Pointer RC_CallConv OpenRemoteProcess(RC_Pointer id, ProcessAccess desiredAccess);
+RC_Pointer RC_CallConv OpenRemoteProcess(RC_Pointer id, ProcessAccess desiredAccess, bool useKernal = false, bool isTargetProcess = false);
 bool RC_CallConv IsProcessValid(RC_Pointer handle);
-void RC_CallConv CloseRemoteProcess(RC_Pointer handle);
+void RC_CallConv CloseRemoteProcess(RC_Pointer handle, DWORD targetProcessID = NULL);
 
 bool RC_CallConv ReadRemoteMemory(RC_Pointer handle, RC_Pointer address, RC_Pointer buffer, int offset, int size);
 bool RC_CallConv WriteRemoteMemory(RC_Pointer handle, RC_Pointer address, RC_Pointer buffer, int offset, int size);

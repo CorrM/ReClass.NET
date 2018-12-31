@@ -13,11 +13,11 @@ namespace ReClassNET.Core
 
 		void EnumerateRemoteSectionsAndModules(IntPtr process, EnumerateRemoteSectionCallback callbackSection, EnumerateRemoteModuleCallback callbackModule);
 
-		IntPtr OpenRemoteProcess(IntPtr pid, ProcessAccess desiredAccess);
+		IntPtr OpenRemoteProcess(IntPtr pid, ProcessAccess desiredAccess, bool UseKernal, bool IsTargetProcess);
 
 		bool IsProcessValid(IntPtr process);
 
-		void CloseRemoteProcess(IntPtr process);
+        void CloseRemoteProcess(IntPtr process, uint targetProcessID);
 
 		bool ReadRemoteMemory(IntPtr process, IntPtr address, ref byte[] buffer, int offset, int size);
 

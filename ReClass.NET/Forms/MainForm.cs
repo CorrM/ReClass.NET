@@ -554,8 +554,12 @@ namespace ReClassNET.Forms
 
 			Program.RemoteProcess.Close();
 
-			Program.RemoteProcess.Open(info);
-			Program.RemoteProcess.UpdateProcessInformations();
+            if (MessageBox.Show("Use kprocesshacker to read/write process memory .?", "Use Kernal.?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                Program.RemoteProcess.Open(info, true);
+            else
+                Program.RemoteProcess.Open(info, false);
+
+            Program.RemoteProcess.UpdateProcessInformations();
 
 			Program.Settings.LastProcess = Program.RemoteProcess.UnderlayingProcess.Name;
 		}
