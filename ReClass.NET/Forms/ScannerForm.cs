@@ -645,13 +645,16 @@ namespace ReClassNET.Forms
 
 			long.TryParse(startAddressTextBox.Text, NumberStyles.HexNumber, null, out var startAddressVar);
 			long.TryParse(stopAddressTextBox.Text, NumberStyles.HexNumber, null, out var endAddressVar);
-#if RECLASSNET64
-			settings.StartAddress = unchecked((IntPtr)startAddressVar);
-			settings.StopAddress = unchecked((IntPtr)endAddressVar);
-#else
-			settings.StartAddress = unchecked((IntPtr)(int)startAddressVar);
-			settings.StopAddress = unchecked((IntPtr)(int)endAddressVar);
-#endif
+            if (Program.TargetProcessIs64)
+            {
+                settings.StartAddress = unchecked((IntPtr)startAddressVar);
+                settings.StopAddress = unchecked((IntPtr)endAddressVar);
+            }
+            else
+            {
+                settings.StartAddress = unchecked((IntPtr)(int)startAddressVar);
+                settings.StopAddress = unchecked((IntPtr)(int)endAddressVar);
+            }
 			settings.EnableFastScan = fastScanCheckBox.Checked;
 			int.TryParse(fastScanAlignmentTextBox.Text, out var alignment);
 			settings.FastScanAlignment = Math.Max(1, alignment);

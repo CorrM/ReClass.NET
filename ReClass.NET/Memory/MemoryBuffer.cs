@@ -460,16 +460,15 @@ namespace ReClassNET.Memory
 		{
 			Contract.Requires(offset >= 0);
 
-#if RECLASSNET64
-			return (IntPtr)ReadInt64(offset);
-#else
-			return (IntPtr)ReadInt32(offset);
-#endif
-		}
+            if (Program.TargetProcessIs64)
+                return (IntPtr)ReadInt64(offset);
+            else
+                return (IntPtr)ReadInt32(offset);
+        }
 
-		#endregion
+        #endregion
 
-		public string ReadPrintableAsciiString(IntPtr offset, int length)
+        public string ReadPrintableAsciiString(IntPtr offset, int length)
 		{
 			Contract.Requires(offset.ToInt32() >= 0);
 			Contract.Requires(length >= 0);
