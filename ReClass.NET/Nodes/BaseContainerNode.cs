@@ -195,25 +195,40 @@ namespace ReClassNET.Nodes
 			while (size != 0)
 			{
 				BaseNode node;
-#if RECLASSNET64
-				if (size >= 8)
-				{
-					node = new Hex64Node();
-				}
-				else 
-#endif
-				if (size >= 4)
-				{
-					node = new Hex32Node();
-				}
-				else if (size >= 2)
-				{
-					node = new Hex16Node();
-				}
-				else
-				{
-					node = new Hex8Node();
-				}
+                if (Program.TargetProcessIs64)
+                {
+                    if (size >= 8)
+                    {
+                        node = new Hex64Node();
+                    }
+                    else if (size >= 4)
+                    {
+                        node = new Hex32Node();
+                    }
+                    else if (size >= 2)
+                    {
+                        node = new Hex16Node();
+                    }
+                    else
+                    {
+                        node = new Hex8Node();
+                    }
+                }
+                else
+                {
+                    if (size >= 4)
+                    {
+                        node = new Hex32Node();
+                    }
+                    else if (size >= 2)
+                    {
+                        node = new Hex16Node();
+                    }
+                    else
+                    {
+                        node = new Hex8Node();
+                    }
+                }
 
 				node.ParentNode = this;
 				node.Offset = offset;

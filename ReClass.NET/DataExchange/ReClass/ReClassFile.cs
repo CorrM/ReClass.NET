@@ -175,28 +175,42 @@ namespace ReClassNET.DataExchange.ReClass
 					while (size != 0)
 					{
 						BaseNode paddingNode;
-#if RECLASSNET64
-						if (size >= 8)
-						{
-							paddingNode = new Hex64Node();
-						}
-						else 
-#endif
-						if (size >= 4)
-						{
-							paddingNode = new Hex32Node();
-						}
-						else if (size >= 2)
-						{
-							paddingNode = new Hex16Node();
-						}
-						else
-						{
-							paddingNode = new Hex8Node();
-						}
+                        if (Program.TargetProcessIs64)
+                        {
+                            if (size >= 8)
+                            {
+                                paddingNode = new Hex64Node();
+                            }
+                            else if (size >= 4)
+                            {
+                                paddingNode = new Hex32Node();
+                            }
+                            else if (size >= 2)
+                            {
+                                paddingNode = new Hex16Node();
+                            }
+                            else
+                            {
+                                paddingNode = new Hex8Node();
+                            }
+                        }
+                        else
+                        {
+                            if (size >= 4)
+                            {
+                                paddingNode = new Hex32Node();
+                            }
+                            else if (size >= 2)
+                            {
+                                paddingNode = new Hex16Node();
+                            }
+                            else
+                            {
+                                paddingNode = new Hex8Node();
+                            }
+                        }
 
 						paddingNode.Comment = node.Comment;
-
 						size -= paddingNode.MemorySize;
 
 						yield return paddingNode;

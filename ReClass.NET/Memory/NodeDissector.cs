@@ -55,13 +55,12 @@ namespace ReClassNET.Memory
 
 			if (is8ByteAligned)
 			{
-#if RECLASSNET64
-				var pointerType = GuessPointerType(data64.IntPtr, memory);
-				if (pointerType != null)
-				{
-					return pointerType;
-				}
-#endif
+                if (Program.TargetProcessIs64)
+                {
+                    var pointerType = GuessPointerType(data64.IntPtr, memory);
+                    if (pointerType != null)
+                        return pointerType;
+                }
 			}
 
 			{

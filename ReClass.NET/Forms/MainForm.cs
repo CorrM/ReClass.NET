@@ -42,21 +42,21 @@ namespace ReClassNET.Forms
 
 			InitializeComponent();
 
-			Text = $"{Constants.ApplicationName} ({Constants.Platform})";
+			Text = $"{Constants.ApplicationName} (x64)";
 
 			mainMenuStrip.Renderer = new CustomToolStripProfessionalRenderer(true, true);
 			toolStrip.Renderer = new CustomToolStripProfessionalRenderer(true, false);
 
 			Program.RemoteProcess.ProcessAttached += sender =>
 			{
-				var text = $"{sender.UnderlayingProcess.Name} (ID: {sender.UnderlayingProcess.Id.ToString()})";
+				var text = $"{sender.UnderlayingProcess.Name} (ID: {sender.UnderlayingProcess.Id.ToString()}, Platform: {Constants.Platform})";
 
-				Text = $"{Constants.ApplicationName} ({Constants.Platform}) - {text}";
+				Text = $"{Constants.ApplicationName} (x64) - {text}";
 				processInfoToolStripStatusLabel.Text = text;
 			};
 			Program.RemoteProcess.ProcessClosed += sender =>
 			{
-				Text = $"{Constants.ApplicationName} ({Constants.Platform})";
+				Text = $"{Constants.ApplicationName} (x64)";
 				processInfoToolStripStatusLabel.Text = "No process selected";
 			};
 
@@ -393,6 +393,20 @@ namespace ReClassNET.Forms
 				{
 					if (pb.SelectedProcess != null)
 					{
+                        // Is 64Bit
+                        Program.TargetProcessIs64 = System.Diagnostics.Process.GetProcessById(pb.SelectedProcess.Id.ToInt32()).Is64BitProcess();
+
+                        if (Program.TargetProcessIs64)
+                        {
+                            Constants.Platform = "x64";
+                            Constants.AddressHexFormat = "X016";
+                        }
+                        else
+                        {
+                            Constants.Platform = "x86";
+                            Constants.AddressHexFormat = "X08";
+                        }
+
 						AttachToProcess(pb.SelectedProcess);
 
 						if (pb.LoadSymbols)

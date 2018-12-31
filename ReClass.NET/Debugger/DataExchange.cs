@@ -15,7 +15,6 @@ namespace ReClassNET.Debugger
 		[StructLayout(LayoutKind.Sequential, Pack = 1)]
 		public struct RegisterInfo
 		{
-#if RECLASSNET64
 			public IntPtr Rax;
 			public IntPtr Rbx;
 			public IntPtr Rcx;
@@ -34,7 +33,7 @@ namespace ReClassNET.Debugger
 			public IntPtr R13;
 			public IntPtr R14;
 			public IntPtr R15;
-#else
+
 			public IntPtr Eax;
 			public IntPtr Ebx;
 			public IntPtr Ecx;
@@ -44,7 +43,6 @@ namespace ReClassNET.Debugger
 			public IntPtr Esp;
 			public IntPtr Ebp;
 			public IntPtr Eip;
-#endif
 		};
 
 		public RegisterInfo Registers;

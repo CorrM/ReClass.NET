@@ -105,13 +105,13 @@ namespace ReClassNET.Nodes
 			{
 				if (spot.Text.TryGetHexString(out var hexValue) && long.TryParse(hexValue, NumberStyles.HexNumber, null, out var val))
 				{
-#if RECLASSNET64
-					var address = (IntPtr)val;
-#else
-					var address = (IntPtr)unchecked((int)val);
-#endif
+                    IntPtr address;
+                    if (Program.TargetProcessIs64)
+                        address = (IntPtr)val;
+                    else
+                        address = (IntPtr)unchecked((int)val);
 
-					spot.Memory.Process.WriteRemoteMemory(spot.Address, address);
+                    spot.Memory.Process.WriteRemoteMemory(spot.Address, address);
 				}
 			}
 		}

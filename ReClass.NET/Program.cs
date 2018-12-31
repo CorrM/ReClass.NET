@@ -29,6 +29,8 @@ namespace ReClassNET
 
 		public static MainForm MainForm { get; private set; }
 
+        public static bool TargetProcessIs64 { get; set; } = true;
+
 		public static bool DesignMode { get; private set; } = true;
 
 		public static FontEx MonoSpaceFont { get; private set; }

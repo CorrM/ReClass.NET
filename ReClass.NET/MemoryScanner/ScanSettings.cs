@@ -12,13 +12,8 @@ namespace ReClassNET.MemoryScanner
 	public class ScanSettings
 	{
 		public IntPtr StartAddress { get; set; } = IntPtr.Zero;
-		public IntPtr StopAddress { get; set; } =
-#if RECLASSNET64
-			(IntPtr)long.MaxValue;
-#else
-			(IntPtr)int.MaxValue;
-#endif
-		public SettingState ScanWritableMemory { get; set; } = SettingState.Yes;
+		public IntPtr StopAddress { get; set; } = Program.TargetProcessIs64 ? (IntPtr)long.MaxValue : (IntPtr)int.MaxValue;
+        public SettingState ScanWritableMemory { get; set; } = SettingState.Yes;
 		public SettingState ScanExecutableMemory { get; set; } = SettingState.Indeterminate;
 		public SettingState ScanCopyOnWriteMemory { get; set; } = SettingState.No;
 		public bool ScanPrivateMemory { get; set; } = true;

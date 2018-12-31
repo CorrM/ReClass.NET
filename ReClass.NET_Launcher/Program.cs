@@ -11,7 +11,8 @@ namespace ReClassNET_Launcher
 {
 	static class Program
 	{
-		[STAThread]
+        public static bool is64Bit;
+        [STAThread]
 		static void Main(string[] args)
 		{
 			var commandLineArgs = new CommandLineArgs(args);
@@ -30,7 +31,7 @@ namespace ReClassNET_Launcher
 				return;
 			}
 
-			var is64Bit = IntPtr.Size == 8;
+			is64Bit = IntPtr.Size == 8;
 
 			// If there is a file in the commandline, read the platform.
 			if (commandLineArgs.FileName != null)

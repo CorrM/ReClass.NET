@@ -131,51 +131,87 @@ namespace ReClassNET.Debugger
 
 			while (size > 0)
 			{
-#if RECLASSNET64
-				if (size >= 8)
-				{
-					if (address.Mod(8) == 0)
-					{
-						splits.Add(new BreakpointSplit { Address = address, Size = 8 });
+                if (Program.TargetProcessIs64)
+                {
+                    if (size >= 8)
+                    {
+                        if (address.Mod(8) == 0)
+                        {
+                            splits.Add(new BreakpointSplit { Address = address, Size = 8 });
 
-						address += 8;
-						size -= 8;
+                            address += 8;
+                            size -= 8;
 
-						continue;
-					}
-				}
-#endif
-				if (size >= 4)
-				{
-					if (address.Mod(4) == 0)
-					{
-						splits.Add(new BreakpointSplit { Address = address, Size = 4 });
+                            continue;
+                        }
+                    }
 
-						address += 4;
-						size -= 4;
+                    if (size >= 4)
+                    {
+                        if (address.Mod(4) == 0)
+                        {
+                            splits.Add(new BreakpointSplit { Address = address, Size = 4 });
 
-						continue;
-					}
-				}
-				if (size >= 2)
-				{
-					if (address.Mod(2) == 0)
-					{
-						splits.Add(new BreakpointSplit { Address = address, Size = 2 });
+                            address += 4;
+                            size -= 4;
 
-						address += 2;
-						size -= 2;
+                            continue;
+                        }
+                    }
+                    if (size >= 2)
+                    {
+                        if (address.Mod(2) == 0)
+                        {
+                            splits.Add(new BreakpointSplit { Address = address, Size = 2 });
 
-						continue;
-					}
-				}
-				if (size >= 1)
-				{
-					splits.Add(new BreakpointSplit { Address = address, Size = 1 });
+                            address += 2;
+                            size -= 2;
 
-					address += 1;
-					size -= 1;
-				}
+                            continue;
+                        }
+                    }
+                    if (size >= 1)
+                    {
+                        splits.Add(new BreakpointSplit { Address = address, Size = 1 });
+
+                        address += 1;
+                        size -= 1;
+                    }
+                }
+                else
+                {
+                    if (size >= 4)
+                    {
+                        if (address.Mod(4) == 0)
+                        {
+                            splits.Add(new BreakpointSplit { Address = address, Size = 4 });
+
+                            address += 4;
+                            size -= 4;
+
+                            continue;
+                        }
+                    }
+                    if (size >= 2)
+                    {
+                        if (address.Mod(2) == 0)
+                        {
+                            splits.Add(new BreakpointSplit { Address = address, Size = 2 });
+
+                            address += 2;
+                            size -= 2;
+
+                            continue;
+                        }
+                    }
+                    if (size >= 1)
+                    {
+                        splits.Add(new BreakpointSplit { Address = address, Size = 1 });
+
+                        address += 1;
+                        size -= 1;
+                    }
+                }
 			}
 
 			return splits;

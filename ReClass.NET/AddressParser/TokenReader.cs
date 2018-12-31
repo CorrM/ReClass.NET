@@ -70,13 +70,13 @@ namespace ReClassNET.AddressParser
 
 					if (long.TryParse(buffer, NumberStyles.HexNumber, null, out var offsetValue))
 					{
-#if RECLASSNET64
-						var address = (IntPtr)offsetValue;
-#else
-						var address = (IntPtr)unchecked((int)offsetValue);
-#endif
+                        IntPtr address;
+                        if (Program.TargetProcessIs64)
+                            address = (IntPtr)offsetValue;
+                        else
+                            address = (IntPtr)unchecked((int)offsetValue);
 
-						tokens.Add(new Token(TokenType.Offset, address));
+                        tokens.Add(new Token(TokenType.Offset, address));
 						isFormulaSubPart = false;
 					}
 					else

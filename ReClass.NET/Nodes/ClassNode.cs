@@ -17,11 +17,7 @@ namespace ReClassNET.Nodes
 	{
 		public static event ClassCreatedEventHandler ClassCreated;
 
-#if RECLASSNET64
-		public static IntPtr DefaultAddress { get; } = (IntPtr)0x140000000;
-#else
-		public static IntPtr DefaultAddress { get; } = (IntPtr)0x400000;
-#endif
+		public static IntPtr DefaultAddress { get; } = Program.TargetProcessIs64 ? (IntPtr)0x140000000 : (IntPtr)0x400000;
 
 		/// <summary>Size of the node in bytes.</summary>
 		public override int MemorySize => Nodes.Sum(n => n.MemorySize);

@@ -10,7 +10,7 @@ namespace ReClassNET.Memory
 		public IntPtr Id { get; }
 		public string Name { get; }
 		public string Path { get; }
-		public Image Icon => icon.Value;
+        public Image Icon => icon.Value;
 
 		private readonly Lazy<Image> icon;
 
@@ -22,6 +22,7 @@ namespace ReClassNET.Memory
 			Id = id;
 			Name = name;
 			Path = path;
+
 			icon = new Lazy<Image>(() =>
 			{
 				using (var i = NativeMethods.GetIconForFile(Path))

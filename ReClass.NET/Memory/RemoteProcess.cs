@@ -322,21 +322,17 @@ namespace ReClassNET.Memory
 		/// <returns>The data read as <see cref="IntPtr"/> or 0 if the read fails.</returns>
 		public IntPtr ReadRemoteIntPtr(IntPtr address)
 		{
-#if RECLASSNET64
-			return (IntPtr)ReadRemoteInt64(address);
-#else
-			return (IntPtr)ReadRemoteInt32(address);
-#endif
-		}
+            return (IntPtr)ReadRemoteInt64(address);
+        }
 
-		#endregion
+        #endregion
 
-		/// <summary>Reads a string from the address in the remote process with the given length using the provided encoding.</summary>
-		/// <param name="encoding">The encoding used by the string.</param>
-		/// <param name="address">The address of the string.</param>
-		/// <param name="length">The length of the string.</param>
-		/// <returns>The string.</returns>
-		public string ReadRemoteString(Encoding encoding, IntPtr address, int length)
+        /// <summary>Reads a string from the address in the remote process with the given length using the provided encoding.</summary>
+        /// <param name="encoding">The encoding used by the string.</param>
+        /// <param name="address">The address of the string.</param>
+        /// <param name="length">The length of the string.</param>
+        /// <returns>The string.</returns>
+        public string ReadRemoteString(Encoding encoding, IntPtr address, int length)
 		{
 			Contract.Requires(encoding != null);
 			Contract.Requires(length >= 0);
@@ -410,13 +406,8 @@ namespace ReClassNET.Memory
 					if (objectLocatorPtr.MayBeValid())
 					{
 
-#if RECLASSNET64
-						rtti = ReadRemoteRuntimeTypeInformation64(objectLocatorPtr);
-#else
-						rtti = ReadRemoteRuntimeTypeInformation32(objectLocatorPtr);
-#endif
-
-						rttiCache[address] = rtti;
+                        rtti = ReadRemoteRuntimeTypeInformation64(objectLocatorPtr);
+                        rttiCache[address] = rtti;
 					}
 				}
 				return rtti;

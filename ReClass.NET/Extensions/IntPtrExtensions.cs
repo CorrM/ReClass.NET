@@ -17,95 +17,61 @@ namespace ReClassNET.Extensions
 		[DebuggerStepThrough]
 		public static bool MayBeValid(this IntPtr ptr)
 		{
-#if RECLASSNET64
-			return ptr.InRange((IntPtr)0x10000, (IntPtr)long.MaxValue);
-#else
-			return ptr.InRange((IntPtr)0x10000, (IntPtr)int.MaxValue);
-#endif
+            return ptr.InRange((IntPtr)0x10000, (IntPtr)long.MaxValue);
 		}
 
 		[Pure]
 		[DebuggerStepThrough]
 		public static IntPtr Add(this IntPtr lhs, IntPtr rhs)
 		{
-#if RECLASSNET64
-			return new IntPtr(lhs.ToInt64() + rhs.ToInt64());
-#else
-			return new IntPtr(lhs.ToInt32() + rhs.ToInt32());
-#endif
-		}
+            return new IntPtr(lhs.ToInt64() + rhs.ToInt64());
+        }
 
 		[Pure]
 		[DebuggerStepThrough]
 		public static IntPtr Sub(this IntPtr lhs, IntPtr rhs)
 		{
-#if RECLASSNET64
-			return new IntPtr(lhs.ToInt64() - rhs.ToInt64());
-#else
-			return new IntPtr(lhs.ToInt32() - rhs.ToInt32());
-#endif
+            return new IntPtr(lhs.ToInt64() - rhs.ToInt64());
 		}
 
 		[Pure]
 		[DebuggerStepThrough]
 		public static IntPtr Mul(this IntPtr lhs, IntPtr rhs)
 		{
-#if RECLASSNET64
-			return new IntPtr(lhs.ToInt64() * rhs.ToInt64());
-#else
-			return new IntPtr(lhs.ToInt32() * rhs.ToInt32());
-#endif
-		}
+            return new IntPtr(lhs.ToInt64() * rhs.ToInt64());
+        }
 
 		[Pure]
 		[DebuggerStepThrough]
 		public static IntPtr Div(this IntPtr lhs, IntPtr rhs)
 		{
 			Contract.Requires(!rhs.IsNull());
-
-#if RECLASSNET64
-			return new IntPtr(lhs.ToInt64() / rhs.ToInt64());
-#else
-			return new IntPtr(lhs.ToInt32() / rhs.ToInt32());
-#endif
+            return new IntPtr(lhs.ToInt64() / rhs.ToInt64());
 		}
 
 		[Pure]
 		[DebuggerStepThrough]
 		public static int Mod(this IntPtr lhs, int mod)
 		{
-#if RECLASSNET64
-			return (int)(lhs.ToInt64() % mod);
-#else
-			return lhs.ToInt32() % mod;
-#endif
+            return (int)(lhs.ToInt64() % mod);
 		}
 
 		[Pure]
 		[DebuggerStepThrough]
 		public static bool InRange(this IntPtr address, IntPtr start, IntPtr end)
 		{
-#if RECLASSNET64
-			var val = (ulong)address.ToInt64();
-			return (ulong)start.ToInt64() <= val && val <= (ulong)end.ToInt64();
-#else
-			var val = (uint)address.ToInt32();
-			return (uint)start.ToInt32() <= val && val <= (uint)end.ToInt32();
-#endif
+            var val = (ulong)address.ToInt64();
+            return (ulong)start.ToInt64() <= val && val <= (ulong)end.ToInt64();
 		}
 
 		[Pure]
 		[DebuggerStepThrough]
 		public static int CompareTo(this IntPtr lhs, IntPtr rhs)
 		{
-#if RECLASSNET64
-			return ((ulong)lhs.ToInt64()).CompareTo((ulong)rhs.ToInt64());
-#else
-			return ((uint)lhs.ToInt32()).CompareTo((uint)rhs.ToInt32());
-#endif
-		}
+            return ((ulong)lhs.ToInt64()).CompareTo((ulong)rhs.ToInt64());
+        }
 
-		[Pure]
+        [Pure]
 		[DebuggerStepThrough]
 		public static int CompareToRange(this IntPtr address, IntPtr start, IntPtr end)
 		{
@@ -127,22 +93,27 @@ namespace ReClassNET.Extensions
 		[DebuggerStepThrough]
 		public static long ToInt64Bits(this IntPtr ptr)
 		{
-#if RECLASSNET64
-			return ptr.ToInt64();
-#else
-			var value = ptr.ToInt64();
+            return ptr.ToInt64();
 
-			if (value < 0)
-			{
-				var intValue = ptr.ToInt32();
-				if (value == intValue)
-				{
-					value = intValue & 0xFFFFFFFFL;
-				}
-			}
+            //if (is64Bit)
+            //{
+            //    return ptr.ToInt64();
+            //}
+            //else
+            //{
+            //    var value = ptr.ToInt64();
 
-			return value;
-#endif
-		}
+            //    if (value < 0)
+            //    {
+            //        var intValue = ptr.ToInt32();
+            //        if (value == intValue)
+            //        {
+            //            value = intValue & 0xFFFFFFFFL;
+            //        }
+            //    }
+
+            //    return value;
+            //}
+        }
 	}
 }
