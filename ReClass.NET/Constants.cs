@@ -2,7 +2,7 @@
 {
 	public class Constants
 	{
-		public const string ApplicationName = "ReClass.NET";
+		public const string ApplicationName = "ReClass.NET (CorrM Edition)";
 
 		public const string ApplicationExecutableName = ApplicationName + ".exe";
 
