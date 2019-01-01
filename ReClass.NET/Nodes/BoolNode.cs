@@ -6,7 +6,7 @@ namespace ReClassNET.Nodes
 	public class BoolNode : BaseNumericNode
 	{
 		/// <summary>Size of the node in bytes.</summary>
-		public override int MemorySize => 1;
+		public override int MemorySize { get; set; } = 1;
 
 		/// <summary>Draws this node.</summary>
 		/// <param name="view">The view information.</param>

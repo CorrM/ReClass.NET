@@ -307,7 +307,7 @@ namespace ReClassNET.DataExchange.ReClass
 		/// <summary>Dummy node to represent the ReClass Custom node.</summary>
 		private class CustomNode : BaseNode
 		{
-			public override int MemorySize => throw new NotImplementedException();
+			public override int MemorySize { get { throw new NotImplementedException(); } set { } }
 
 			public override int CalculateDrawnHeight(ViewInfo view)
 			{

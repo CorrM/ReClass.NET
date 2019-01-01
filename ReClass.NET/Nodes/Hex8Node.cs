@@ -6,7 +6,7 @@ namespace ReClassNET.Nodes
 {
 	public class Hex8Node : BaseHexNode
 	{
-		public override int MemorySize => 1;
+		public override int MemorySize { get; set; } = 1;
 
 		public override string GetToolTipText(HotSpot spot, MemoryBuffer memory)
 		{

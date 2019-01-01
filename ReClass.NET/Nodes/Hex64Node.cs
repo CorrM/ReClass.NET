@@ -8,7 +8,7 @@ namespace ReClassNET.Nodes
 	public class Hex64Node : BaseHexCommentNode
 	{
 		/// <summary>Size of the node in bytes.</summary>
-		public override int MemorySize => 8;
+		public override int MemorySize { get; set; } = 8;
 
 		public override bool UseMemoryPreviewToolTip(HotSpot spot, MemoryBuffer memory, out IntPtr address)
 		{

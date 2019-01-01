@@ -9,7 +9,7 @@ namespace ReClassNET.Nodes
 {
 	public class UInt8Node : BaseNumericNode
 	{
-		public override int MemorySize => 1;
+		public override int MemorySize { get; set; } = 1;
 
 		public override Size Draw(ViewInfo view, int x, int y)
 		{

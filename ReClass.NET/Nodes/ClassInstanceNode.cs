@@ -9,7 +9,7 @@ namespace ReClassNET.Nodes
 	public class ClassInstanceNode : BaseReferenceNode
 	{
 		/// <summary>Size of the node in bytes.</summary>
-		public override int MemorySize => InnerNode.MemorySize;
+		public override int MemorySize { get { return InnerNode.MemorySize; } set { } }
 
 		public override bool PerformCycleCheck => true;
 

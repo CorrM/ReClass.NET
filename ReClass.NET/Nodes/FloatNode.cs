@@ -6,7 +6,7 @@ namespace ReClassNET.Nodes
 {
 	public class FloatNode : BaseNumericNode
 	{
-		public override int MemorySize => 4;
+		public override int MemorySize { get; set; } = 4;
 
 		public override Size Draw(ViewInfo view, int x, int y)
 		{

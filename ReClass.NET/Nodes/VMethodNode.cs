@@ -9,7 +9,9 @@ namespace ReClassNET.Nodes
 	{
 		public string MethodName => string.IsNullOrEmpty(Name) ? $"Function{Offset.ToInt32() / IntPtr.Size}" : Name;
 
-		public VMethodNode()
+        public override int MemorySize { set => throw new NotImplementedException(); }
+
+        public VMethodNode()
 		{
 			Contract.Ensures(Name != null);
 

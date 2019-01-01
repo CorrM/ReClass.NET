@@ -42,7 +42,7 @@ namespace ReClassNET.Nodes
 			}
 		}
 
-		public override int MemorySize => size;
+		public override int MemorySize { get { return size; } set { } }
 
 		public BitFieldNode()
 		{

@@ -959,8 +959,9 @@ namespace ReClassNET.UI
 
 		private void unhideChildNodesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			UnhideChildNodes();
-		}
+            if (!(sender is ToolStripMenuItem))
+                UnhideChildNodes();
+        }
 
 		private void unhideNodesAboveToolStripMenuItem_Click(object sender, EventArgs e)
 		{

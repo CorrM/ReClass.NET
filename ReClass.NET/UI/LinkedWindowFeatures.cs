@@ -136,7 +136,8 @@ namespace ReClassNET.UI
 		{
 			Contract.Requires(classes != null);
 
-			ShowCodeGeneratorForm(classes, new CppCodeGenerator());
+            bool ptrIs64Bit = MessageBox.Show("Pointer is 64bit (8byte) .?", "Pointer Size", MessageBoxButtons.YesNo) == DialogResult.Yes;
+            ShowCodeGeneratorForm(classes, new CppCodeGenerator(ptrIs64Bit));
 		}
 
 		public static void ShowCodeGeneratorForm(IEnumerable<ClassNode> classes, ICodeGenerator generator)

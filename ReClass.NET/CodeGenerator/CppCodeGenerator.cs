@@ -12,7 +12,8 @@ namespace ReClassNET.CodeGenerator
 {
 	class CppCodeGenerator : ICodeGenerator
 	{
-		private readonly Dictionary<Type, string> typeToTypedefMap = new Dictionary<Type, string>
+        private bool ptrIs64Bit;
+        private readonly Dictionary<Type, string> typeToTypedefMap = new Dictionary<Type, string>
 		{
 			[typeof(BoolNode)] = Program.Settings.TypeBool,
 			[typeof(DoubleNode)] = Program.Settings.TypeDouble,
@@ -42,7 +43,12 @@ namespace ReClassNET.CodeGenerator
 
 		public Language Language => Language.Cpp;
 
-		public string GenerateCode(IEnumerable<ClassNode> classes, ILogger logger)
+        public CppCodeGenerator(bool ptrIs64Bit)
+        {
+            this.ptrIs64Bit = ptrIs64Bit;
+        }
+
+        public string GenerateCode(IEnumerable<ClassNode> classes, ILogger logger)
 		{
 			var classNodes = classes as IList<ClassNode> ?? classes.ToList();
 
@@ -225,7 +231,8 @@ namespace ReClassNET.CodeGenerator
 				}
 				else if (member is ClassPtrNode)
 				{
-					yield return new MemberDefinition(member, $"class {((ClassPtrNode)member).InnerNode.Name}*");
+                    member.MemorySize = ptrIs64Bit ? 8 : 4;
+                    yield return new MemberDefinition(member, $"class {((ClassPtrNode)member).InnerNode.Name}*");
 				}
 				else
 				{

@@ -7,7 +7,7 @@ namespace ReClassNET.Nodes
 	public class Hex16Node : BaseHexNode
 	{
 		/// <summary>Size of the node in bytes.</summary>
-		public override int MemorySize => 2;
+		public override int MemorySize { get; set; } = 2;
 
 		/// <summary>Gets informations about this node to show in a tool tip.</summary>
 		/// <param name="spot">The spot.</param>

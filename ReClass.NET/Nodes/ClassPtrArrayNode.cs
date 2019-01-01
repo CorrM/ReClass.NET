@@ -9,7 +9,7 @@ namespace ReClassNET.Nodes
 	{
 		private readonly MemoryBuffer memory = new MemoryBuffer();
 
-		public override int MemorySize => IntPtr.Size * Count;
+		public override int MemorySize { get { return IntPtr.Size * Count; } set { } }
 
 		public override bool PerformCycleCheck => false;
 

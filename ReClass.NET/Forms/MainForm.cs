@@ -365,13 +365,15 @@ namespace ReClassNET.Forms
 
 		private void generateCppCodeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			ShowCodeForm(new CppCodeGenerator());
+            bool ptrIs64Bit = MessageBox.Show("Pointer is 64bit (8byte) .?", "Pointer Size", MessageBoxButtons.YesNo) == DialogResult.Yes;
+			ShowCodeForm(new CppCodeGenerator(ptrIs64Bit));
 		}
 
 		private void generateCSharpCodeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			ShowCodeForm(new CSharpCodeGenerator());
-		}
+            bool ptrIs64Bit = MessageBox.Show("Pointer is 64bit (8byte) .?", "Pointer Size", MessageBoxButtons.YesNo) == DialogResult.Yes;
+			ShowCodeForm(new CSharpCodeGenerator(ptrIs64Bit));
+        }
 
 		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
 		{

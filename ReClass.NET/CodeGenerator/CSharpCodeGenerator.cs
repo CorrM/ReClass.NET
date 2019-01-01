@@ -12,6 +12,7 @@ namespace ReClassNET.CodeGenerator
 {
 	class CSharpCodeGenerator : ICodeGenerator
 	{
+        private bool ptrIs64Bit;
 		private readonly Dictionary<Type, string> typeToTypedefMap = new Dictionary<Type, string>
 		{
 			[typeof(DoubleNode)] = "double",
@@ -34,9 +35,12 @@ namespace ReClassNET.CodeGenerator
 			[typeof(VTableNode)] = "IntPtr"
 		};
 
-		public Language Language => Language.CSharp;
-
-		public string GenerateCode(IEnumerable<ClassNode> classes, ILogger logger)
+        public Language Language => Language.CSharp;
+        public CSharpCodeGenerator(bool ptrIs64Bit)
+        {
+            this.ptrIs64Bit = ptrIs64Bit;
+        }
+        public string GenerateCode(IEnumerable<ClassNode> classes, ILogger logger)
 		{
 			var sb = new StringBuilder();
 			sb.AppendLine($"// Created with {Constants.ApplicationName} by {Constants.Author}");

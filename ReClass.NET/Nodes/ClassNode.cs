@@ -20,7 +20,7 @@ namespace ReClassNET.Nodes
 		public static IntPtr DefaultAddress { get; } = Program.TargetProcessIs64 ? (IntPtr)0x140000000 : (IntPtr)0x400000;
 
 		/// <summary>Size of the node in bytes.</summary>
-		public override int MemorySize => Nodes.Sum(n => n.MemorySize);
+		public override int MemorySize { get { return Nodes.Sum(n => n.MemorySize); } set { } }
 
 		private NodeUuid uuid;
 		public NodeUuid Uuid

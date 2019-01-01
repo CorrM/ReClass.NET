@@ -19,7 +19,7 @@ namespace ReClassNET.Nodes
 
 		public override int ValueTypeSize => sizeof(float);
 
-		public override int MemorySize => 3 * ValueTypeSize;
+		public override int MemorySize { get { return 3 * ValueTypeSize; } set { } }
 
 		/// <summary>Draws this node.</summary>
 		/// <param name="view">The view information.</param>

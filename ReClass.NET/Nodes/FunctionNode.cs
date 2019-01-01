@@ -16,7 +16,7 @@ namespace ReClassNET.Nodes
 
 		private int memorySize = IntPtr.Size;
 		/// <summary>Size of the node in bytes.</summary>
-		public override int MemorySize => memorySize;
+		public override int MemorySize { get; set; } = IntPtr.Size;
 
 		public override string GetToolTipText(HotSpot spot, MemoryBuffer memory)
 		{

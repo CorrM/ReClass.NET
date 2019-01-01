@@ -47,7 +47,7 @@ namespace ReClassNET.Nodes
 		public bool IsSelected { get; set; }
 
 		/// <summary>Size of the node in bytes.</summary>
-		public abstract int MemorySize { get; }
+		public abstract int MemorySize { get; set; }
 
 		public event NodeEventHandler NameChanged;
 		public event NodeEventHandler CommentChanged;

@@ -8,7 +8,9 @@ namespace ReClassNET.Nodes
 	{
 		public override Encoding Encoding => Encoding.UTF8;
 
-		public override Size Draw(ViewInfo view, int x, int y)
+        public override int MemorySize { set => throw new System.NotImplementedException(); }
+
+        public override Size Draw(ViewInfo view, int x, int y)
 		{
 			return DrawText(view, x, y, "Text8");
 		}

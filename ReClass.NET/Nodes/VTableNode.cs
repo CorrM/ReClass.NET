@@ -11,7 +11,7 @@ namespace ReClassNET.Nodes
 	{
 		private readonly MemoryBuffer memory = new MemoryBuffer();
 
-		public override int MemorySize => IntPtr.Size;
+		public override int MemorySize { get; set; } = IntPtr.Size;
 
 		public override void Intialize()
 		{
