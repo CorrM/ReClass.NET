@@ -8,12 +8,12 @@ bool RC_CallConv ReadRemoteMemory(RC_Pointer handle, RC_Pointer address, RC_Poin
 		buffer = reinterpret_cast<RC_Pointer>(reinterpret_cast<uintptr_t>(buffer) + offset);
 
 		SIZE_T numberOfBytesRead = 0;
-		if (ByPass == nullptr)
+		if (!UseKernal)
 		{
 			if (ReadProcessMemory(handle, address, buffer, size, &numberOfBytesRead) && size == numberOfBytesRead)
 				return true;
 		}
-		else // BypaPH
+		else if (ByPass != nullptr) // BypaPH
 		{
 			NTSTATUS read = ByPass->RWVM(ByPass->m_hTarget, address, buffer, size, &numberOfBytesRead);
 			/*char gg[9] = { '\0' };

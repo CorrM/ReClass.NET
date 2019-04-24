@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -365,7 +366,9 @@ namespace ReClassNET.Forms
 
 		private void generateCppCodeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-            bool ptrIs64Bit = MessageBox.Show("Pointer is 64bit (8byte) .?", "Pointer Size", MessageBoxButtons.YesNo) == DialogResult.Yes;
+            bool ptrIs64Bit = MessageBox.Show($"Pointer is 64bit (8byte) .?", "Pointer Size", MessageBoxButtons.YesNo) == DialogResult.Yes;
+            if (ptrIs64Bit && !Program.TargetProcessIs64)
+                MessageBox.Show("You targeting (x84) Process, so make sure u have 4bytes after every ClassPtr.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			ShowCodeForm(new CppCodeGenerator(ptrIs64Bit));
 		}
 

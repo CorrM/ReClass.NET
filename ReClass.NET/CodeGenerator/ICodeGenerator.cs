@@ -9,8 +9,9 @@ namespace ReClassNET.CodeGenerator
 	[ContractClass(typeof(CodeGeneratorContract))]
 	public interface ICodeGenerator
 	{
-		/// <summary>The language this generator produces.</summary>
-		Language Language { get; }
+        bool ptrIs64Bit { get; }
+        /// <summary>The language this generator produces.</summary>
+        Language Language { get; }
 
 		/// <summary>Generates code for the classes.</summary>
 		/// <param name="classes">The classes to generate code from.</param>
@@ -22,9 +23,11 @@ namespace ReClassNET.CodeGenerator
 	[ContractClassFor(typeof(ICodeGenerator))]
 	internal abstract class CodeGeneratorContract : ICodeGenerator
 	{
+        public bool ptrIs64Bit => throw new NotImplementedException();
 		public Language Language => throw new NotImplementedException();
 
-		public string GenerateCode(IEnumerable<ClassNode> classes, ILogger logger)
+
+        public string GenerateCode(IEnumerable<ClassNode> classes, ILogger logger)
 		{
 			Contract.Requires(classes != null);
 			Contract.Requires(Contract.ForAll(classes, c => c != null));

@@ -28,6 +28,9 @@ namespace ReClassNET.Forms
 
 			codeRichTextBox.SetInnerPadding(5, 5, 5, 5);
 
+            if (generator.ptrIs64Bit)
+                Text += $" Pointer Is (8Byte)";
+
 			var code = generator.GenerateCode(classes, logger);
 
 			var buffer = new StringBuilder(code.Length * 2);

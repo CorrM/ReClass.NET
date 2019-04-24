@@ -12,7 +12,6 @@ namespace ReClassNET.CodeGenerator
 {
 	class CSharpCodeGenerator : ICodeGenerator
 	{
-        private bool ptrIs64Bit;
 		private readonly Dictionary<Type, string> typeToTypedefMap = new Dictionary<Type, string>
 		{
 			[typeof(DoubleNode)] = "double",
@@ -36,6 +35,8 @@ namespace ReClassNET.CodeGenerator
 		};
 
         public Language Language => Language.CSharp;
+        public bool ptrIs64Bit { get; }
+
         public CSharpCodeGenerator(bool ptrIs64Bit)
         {
             this.ptrIs64Bit = ptrIs64Bit;

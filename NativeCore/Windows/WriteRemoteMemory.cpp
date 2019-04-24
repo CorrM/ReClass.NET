@@ -7,7 +7,7 @@ bool RC_CallConv WriteRemoteMemory(RC_Pointer handle, RC_Pointer address, RC_Poi
 {
 	buffer = reinterpret_cast<RC_Pointer>(reinterpret_cast<uintptr_t>(buffer) + offset);
 
-	if (ByPass == nullptr)
+	if (!UseKernal)
 	{
 		DWORD oldProtect;
 		if (VirtualProtectEx(handle, address, size, PAGE_EXECUTE_READWRITE, &oldProtect))
@@ -24,7 +24,7 @@ bool RC_CallConv WriteRemoteMemory(RC_Pointer handle, RC_Pointer address, RC_Poi
 			}
 		}
 	}
-	else // BypaPH Stuff
+	else if (ByPass != nullptr) // BypaPH Stuff
 	{
 		SIZE_T numberOfBytesWritten = 0;
 		if (ByPass->WVM(ByPass->m_hTarget, address, buffer, size, &numberOfBytesWritten) == STATUS_SUCCESS)

@@ -12,7 +12,6 @@ namespace ReClassNET.CodeGenerator
 {
 	class CppCodeGenerator : ICodeGenerator
 	{
-        private bool ptrIs64Bit;
         private readonly Dictionary<Type, string> typeToTypedefMap = new Dictionary<Type, string>
 		{
 			[typeof(BoolNode)] = Program.Settings.TypeBool,
@@ -42,6 +41,7 @@ namespace ReClassNET.CodeGenerator
 		};
 
 		public Language Language => Language.Cpp;
+        public bool ptrIs64Bit { get; }
 
         public CppCodeGenerator(bool ptrIs64Bit)
         {
@@ -50,7 +50,7 @@ namespace ReClassNET.CodeGenerator
 
         public string GenerateCode(IEnumerable<ClassNode> classes, ILogger logger)
 		{
-			var classNodes = classes as IList<ClassNode> ?? classes.ToList();
+            var classNodes = classes as IList<ClassNode> ?? classes.ToList();
 
 			var sb = new StringBuilder();
 			sb.AppendLine($"// Created with {Constants.ApplicationName} by {Constants.Author}");
@@ -79,18 +79,36 @@ namespace ReClassNET.CodeGenerator
 						}
 						csb.AppendLine();
 
+                        List<BaseNode> newNodes = new List<BaseNode>(c.Nodes);
+                        if (ptrIs64Bit && !Program.TargetProcessIs64) // Game Is x86 and user need ptrIs64Bit (8byte)
+                        {
+                            List<int> IndexsToRmv = new List<int>();
+                            for (int i = 0; i < newNodes.Count; i++)
+                            {
+                                if (newNodes[i] is ClassPtrNode)
+                                {
+                                    IndexsToRmv.Add(i + 1);
+                                    i++;
+                                }
+                            }
+
+                            foreach (var item in IndexsToRmv)
+                                if (item < newNodes.Count)
+                                    newNodes.RemoveAt(item);
+                        }
+
 						csb.AppendLine("{");
 						csb.AppendLine("public:");
 						csb.AppendLine(
 							string.Join(
 								Environment.NewLine,
-								YieldMemberDefinitions(c.Nodes.Skip(skipFirstMember ? 1 : 0).WhereNot(n => n is FunctionNode), logger)
+								YieldMemberDefinitions(newNodes.Skip(skipFirstMember ? 1 : 0).WhereNot(n => n is FunctionNode), logger)
 									.Select(MemberDefinitionToString)
 									.Select(s => "\t" + s)
 							)
 						);
 
-						var vTableNodes = c.Nodes.OfType<VTableNode>().ToList();
+						var vTableNodes = newNodes.OfType<VTableNode>().ToList();
 						if (vTableNodes.Any())
 						{
 							csb.AppendLine();
