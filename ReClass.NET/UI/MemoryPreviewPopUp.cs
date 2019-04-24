@@ -23,10 +23,9 @@ namespace ReClassNET.UI
 		{
 			private const int MinNodeCount = 10;
 
-			public ViewInfo ViewInfo => viewInfo;
+            public ViewInfo ViewInfo { get; }
 
-			private readonly ViewInfo viewInfo;
-			private readonly List<BaseHexNode> nodes;
+            private readonly List<BaseHexNode> nodes;
 
 			public MemoryPreviewPanel(FontEx font)
 			{
@@ -36,7 +35,7 @@ namespace ReClassNET.UI
 
 				nodes = new List<BaseHexNode>();
 
-				viewInfo = new ViewInfo
+				ViewInfo = new ViewInfo
 				{
 					Font = font,
 
@@ -51,17 +50,21 @@ namespace ReClassNET.UI
 				CalculateSize();
 			}
 
-			/// <summary>Sets the absolute number of nodes and resizes the underlaying memory buffer.</summary>
-			/// <param name="count">Number of nodes.</param>
-			private void SetNodeCount(int count)
+            private BaseHexNode CreateNode(int index)
+            {
+                if (Program.TargetProcessIs64)
+                    return new Hex64Node { Offset = (IntPtr)(index * 8) };
+                else
+                    return new Hex32Node { Offset = (IntPtr)(index * 4) };
+            }
+
+            /// <summary>Sets the absolute number of nodes and resizes the underlaying memory buffer.</summary>
+            /// <param name="count">Number of nodes.</param>
+            private void SetNodeCount(int count)
 			{
-				BaseHexNode CreateNode(int index)
-				{
-                    if (Program.TargetProcessIs64)
-                        return new Hex64Node { Offset = (IntPtr)(index * 8) };
-                    else
-                        return new Hex32Node { Offset = (IntPtr)(index * 4) };
-                }
+                // Convert to 32Node (Just clear and [if (nodes.Count < count)] will exec)
+                if (!Program.TargetProcessIs64 && nodes[0] is Hex64Node)
+                    nodes.Clear();
 
                 if (nodes.Count < count)
 				{
@@ -72,7 +75,7 @@ namespace ReClassNET.UI
 					nodes.RemoveRange(count, nodes.Count - count);
 				}
 
-				viewInfo.Memory.Size = nodes.Select(n => n.MemorySize).Sum();
+				ViewInfo.Memory.Size = nodes.Select(n => n.MemorySize).Sum();
 			}
 
 			/// <summary>Changes the number of nodes with the provided delta.</summary>
@@ -97,29 +100,29 @@ namespace ReClassNET.UI
 			{
 				var size = new Size(
 					ToolTipWidth,
-					nodes.Sum(n => n.CalculateDrawnHeight(viewInfo)) + ToolTipPadding
+					nodes.Sum(n => n.CalculateDrawnHeight(ViewInfo)) + ToolTipPadding
 				);
 
-				viewInfo.ClientArea = new Rectangle(ToolTipPadding / 2, ToolTipPadding / 2, size.Width - ToolTipPadding, size.Height - ToolTipPadding);
+				ViewInfo.ClientArea = new Rectangle(ToolTipPadding / 2, ToolTipPadding / 2, size.Width - ToolTipPadding, size.Height - ToolTipPadding);
 
 				Size = MinimumSize = MaximumSize = size;
 			}
 
 			protected override void OnPaint(PaintEventArgs e)
 			{
-				viewInfo.HotSpots.Clear();
+				ViewInfo.HotSpots.Clear();
 
 				// Some settings are not usefull for the preview.
-				viewInfo.Settings = Program.Settings.Clone();
-				viewInfo.Settings.ShowNodeAddress = false;
+				ViewInfo.Settings = Program.Settings.Clone();
+				ViewInfo.Settings.ShowNodeAddress = false;
 
-				viewInfo.Context = e.Graphics;
+				ViewInfo.Context = e.Graphics;
 
-				using (var brush = new SolidBrush(viewInfo.Settings.BackgroundColor))
+				using (var brush = new SolidBrush(ViewInfo.Settings.BackgroundColor))
 				{
 					e.Graphics.FillRectangle(brush, ClientRectangle);
 				}
-				using (var pen = new Pen(viewInfo.Settings.BackgroundColor.Invert(), 1))
+				using (var pen = new Pen(ViewInfo.Settings.BackgroundColor.Invert(), 1))
 				{
 					e.Graphics.DrawRectangle(pen, new Rectangle(Bounds.X, Bounds.Y, Bounds.Width - 1, Bounds.Height - 1));
 				}
@@ -128,7 +131,7 @@ namespace ReClassNET.UI
 				int y = 2;
 				foreach (var node in nodes)
 				{
-					y += node.Draw(viewInfo, x, y).Height;
+					y += node.Draw(ViewInfo, x, y).Height;
 				}
 			}
 		}

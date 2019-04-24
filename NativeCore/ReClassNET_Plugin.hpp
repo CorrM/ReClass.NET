@@ -76,6 +76,7 @@ enum class SectionType
 enum class SectionCategory
 {
 	Unknown,
+
 	CODE,
 	DATA,
 	HEAP

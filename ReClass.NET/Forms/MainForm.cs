@@ -529,7 +529,6 @@ namespace ReClassNET.Forms
 		private void classesView_ClassSelected(object sender, ClassNode node)
 		{
 			memoryViewControl.ClassNode = node;
-
 			memoryViewControl.Invalidate();
 		}
 
@@ -780,5 +779,10 @@ namespace ReClassNET.Forms
 				.LoadAllSymbolsAsync(progress, loadSymbolsTaskToken.Token)
 				.ContinueWith(_ => infoToolStripStatusLabel.Visible = false, TaskScheduler.FromCurrentSynchronizationContext());
 		}
-	}
+
+        private void addNewClassToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LinkedWindowFeatures.CreateDefaultClass();
+        }
+    }
 }
