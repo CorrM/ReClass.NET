@@ -21,8 +21,8 @@ namespace ReClassNET.UI
 	public partial class MemoryViewControl : ScrollableCustomControl
 	{
 		private ReClassNetProject project;
-
-		private ClassNode classNode;
+        private KeyBoardManager keyBoard;
+        private ClassNode classNode;
 
 		private readonly List<HotSpot> hotSpots = new List<HotSpot>();
 		private readonly List<HotSpot> selectedNodes = new List<HotSpot>();
@@ -87,16 +87,14 @@ namespace ReClassNET.UI
 			InitializeComponent();
 
 			if (Program.DesignMode)
-			{
 				return;
-			}
 
 			font = Program.MonoSpaceFont;
-
 			editBox.Font = font;
-
 			memoryPreviewPopUp = new MemoryPreviewPopUp(font);
-		}
+            keyBoard = new KeyBoardManager();
+            keyBoard.KeysCodesToHandle.Add(WindowsInput.Native.VirtualKeyCode.CONTROL);
+        }
 
 		protected override void OnLoad(EventArgs e)
 		{
@@ -508,7 +506,8 @@ namespace ReClassNET.UI
 				{
 					if (spot.Rect.Contains(toolTipPosition))
 					{
-						if (spot.Node.UseMemoryPreviewToolTip(spot, spot.Memory, out var previewAddress))
+						if (spot.Node.UseMemoryPreviewToolTip(spot, spot.Memory, out var previewAddress) &&
+                            keyBoard.input.InputDeviceState.IsKeyDown(WindowsInput.Native.VirtualKeyCode.CONTROL)) // Control Key IsDown
 						{
 							memoryPreviewPopUp.InitializeMemory(spot.Memory.Process, previewAddress);
 							memoryPreviewPopUp.Show(this, toolTipPosition.OffsetEx(16, 16));
