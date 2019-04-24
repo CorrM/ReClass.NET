@@ -511,7 +511,6 @@ namespace ReClassNET.UI
 						if (spot.Node.UseMemoryPreviewToolTip(spot, spot.Memory, out var previewAddress))
 						{
 							memoryPreviewPopUp.InitializeMemory(spot.Memory.Process, previewAddress);
-
 							memoryPreviewPopUp.Show(this, toolTipPosition.OffsetEx(16, 16));
 						}
 						else
