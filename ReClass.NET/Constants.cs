@@ -2,7 +2,7 @@
 {
 	public class Constants
 	{
-		public const string ApplicationName = "ReClass.NET (CorrM Edition)";
+		public const string ApplicationName = "ReClass.NET";
 
 		public const string ApplicationExecutableName = ApplicationName + ".exe";
 
@@ -18,9 +18,9 @@
 
 		public const string PluginUrl = "https://github.com/KN4CK3R/ReClass.NET#plugins";
 
-        public static string Platform = "x64";
+        public static string Platform { get; set; } = "x64";
 
-        public static string AddressHexFormat = "X016";
+        public static string AddressHexFormat { get; set; } = "X016";
 
 //#if RECLASSNET64
 //        public const string Platform = "x64";
