@@ -94,6 +94,7 @@ namespace ReClassNET.Forms
             // Get Some Info
             var lastItem = CompareItems.Last();
             var newLoc = lastItem.AddressBox.Location; newLoc.X += lastItem.AddressBox.Size.Width + 6;
+            var klass = Classes.FirstOrDefault(c => c.Name == ClassBox.Text);
 
             // AddressBox
             var newBox = new PlaceholderTextBox
@@ -101,7 +102,8 @@ namespace ReClassNET.Forms
                 Name = $"Box{CompareItems.Count + 1}",
                 Location = newLoc,
                 PlaceholderText = "Address",
-                Font = Box1.Font
+                Font = Box1.Font,
+                Text = klass.Offset.ToString("X2")
             };
             newBox.TextChanged += AddressBox_TextChanged;
 
@@ -178,11 +180,18 @@ namespace ReClassNET.Forms
 
         private void ClassBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var klass = Classes.FirstOrDefault(c => c.Name == ClassBox.Text);
+
+            foreach (var item in CompareItems.Select(i => i.AddressBox))
+            {
+                if (string.IsNullOrWhiteSpace(item.Text))
+                    item.Text = klass.Offset.ToString("X2");
+            }
+
             foreach (var item in CompareItems)
             {
                 // item.VerticalScroll.Visible = true;
                 // item.HorizontalScroll.Visible = true;
-                var klass = Classes.FirstOrDefault(c => c.Name == ClassBox.Text);
                 IntPtr newOffset = klass.Offset;
                 try { newOffset = new IntPtr(Convert.ToInt32(item.AddressBox.Text, 16)); } catch (Exception) { }
                 item.ViewBox.ClassNode = klass;

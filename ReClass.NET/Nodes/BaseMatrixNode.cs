@@ -174,7 +174,7 @@ namespace ReClassNET.Nodes
 
             x = AddText(view, x, y, view.Settings.TypeColor, HotSpot.NoneId, type) + view.Font.Width;
             x = AddText(view, x, y, view.Settings.NameColor, HotSpot.NameId, Name);
-            x = AddOpenClose(view, x, y);
+            // x = AddOpenClose(view, x, y);
 
             if (levelsOpen[view.Level])
             {
