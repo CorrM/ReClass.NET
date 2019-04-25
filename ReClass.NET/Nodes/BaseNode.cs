@@ -127,14 +127,21 @@ namespace ReClassNET.Nodes
 		/// <returns>The pixel size the node occupies.</returns>
 		public abstract Size Draw(ViewInfo view, int x, int y);
 
-		/// <summary>
-		/// Calculates the height of the node if drawn.
-		/// This method is used to determine if a node outside the visible area should be drawn.
-		/// The returned height must be equal to the height which is returned by the <see cref="Draw(ViewInfo, int, int)"/> method.
-		/// </summary>
+        /// <summary>Draws the node for compare.</summary>
 		/// <param name="view">The view information.</param>
-		/// <returns>The calculated height.</returns>
-		public abstract int CalculateDrawnHeight(ViewInfo view);
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <returns>The pixel size the node occupies.</returns>
+		public abstract Size DrawCompare(ViewInfo view, int x, int y);
+
+        /// <summary>
+        /// Calculates the height of the node if drawn.
+        /// This method is used to determine if a node outside the visible area should be drawn.
+        /// The returned height must be equal to the height which is returned by the <see cref="Draw(ViewInfo, int, int)"/> method.
+        /// </summary>
+        /// <param name="view">The view information.</param>
+        /// <returns>The calculated height.</returns>
+        public abstract int CalculateDrawnHeight(ViewInfo view);
 
 		/// <summary>Updates the node from the given <paramref name="spot"/>. Sets the <see cref="Name"/> and <see cref="Comment"/> of the node.</summary>
 		/// <param name="spot">The spot.</param>
@@ -232,36 +239,49 @@ namespace ReClassNET.Nodes
 			return x + width;
 		}
 
-		/// <summary>Draws the address and <see cref="Offset"/> of the node.</summary>
-		/// <param name="view">The view information.</param>
-		/// <param name="x">The x coordinate.</param>
-		/// <param name="y">The y coordinate.</param>
-		/// <returns>The new x coordinate after drawing the text.</returns>
-		protected int AddAddressOffset(ViewInfo view, int x, int y)
+        /// <summary>Draws the address and <see cref="Offset"/> of the node.</summary>
+        /// <param name="view">The view information.</param>
+        /// <param name="x">The x coordinate.</param>
+        /// <param name="y">The y coordinate.</param>
+		/// <param name="ShowOffset">Show address offset.</param>
+        /// <param name="ShowAddress">Show address.</param>
+        /// <returns>The new x coordinate after drawing the text.</returns>
+        protected int AddAddressOffset(ViewInfo view, int x, int y)
 		{
 			Contract.Requires(view != null);
 			Contract.Requires(view.Context != null);
 			Contract.Requires(view.Font != null);
 
-			if (view.Settings.ShowNodeOffset)
-			{
+            if (view.Settings.ShowNodeOffset)
 				x = AddText(view, x, y, view.Settings.OffsetColor, HotSpot.NoneId, $"{Offset.ToInt32():X04}") + view.Font.Width;
-			}
 
 			if (view.Settings.ShowNodeAddress)
-			{
 				x = AddText(view, x, y, view.Settings.AddressColor, HotSpot.AddressId, view.Address.Add(Offset).ToString(Constants.AddressHexFormat)) + view.Font.Width;
-			}
 
 			return x;
 		}
 
-		/// <summary>Draws a bar which indicates the selection status of the node. A <see cref="HotSpot"/> for this area gets added too.</summary>
-		/// <param name="view">The view information.</param>
-		/// <param name="x">The x coordinate.</param>
-		/// <param name="y">The y coordinate.</param>
-		/// <param name="height">The height of the bar.</param>
-		protected void AddSelection(ViewInfo view, int x, int y, int height)
+        protected int AddAddressOffset(ViewInfo view, int x, int y, bool ShowOffset, bool ShowAddress)
+        {
+            Contract.Requires(view != null);
+            Contract.Requires(view.Context != null);
+            Contract.Requires(view.Font != null);
+
+            if (ShowOffset)
+                x = AddText(view, x, y, view.Settings.OffsetColor, HotSpot.NoneId, $"{Offset.ToInt32():X04}") + view.Font.Width;
+
+            if (ShowAddress)
+                x = AddText(view, x, y, view.Settings.AddressColor, HotSpot.AddressId, view.Address.Add(Offset).ToString(Constants.AddressHexFormat)) + view.Font.Width;
+
+            return x;
+        }
+
+        /// <summary>Draws a bar which indicates the selection status of the node. A <see cref="HotSpot"/> for this area gets added too.</summary>
+        /// <param name="view">The view information.</param>
+        /// <param name="x">The x coordinate.</param>
+        /// <param name="y">The y coordinate.</param>
+        /// <param name="height">The height of the bar.</param>
+        protected void AddSelection(ViewInfo view, int x, int y, int height)
 		{
 			Contract.Requires(view != null);
 			Contract.Requires(view.Context != null);

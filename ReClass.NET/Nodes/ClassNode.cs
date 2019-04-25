@@ -158,7 +158,101 @@ namespace ReClassNET.Nodes
 			return size;
 		}
 
-		public override int CalculateDrawnHeight(ViewInfo view)
+        public override Size DrawCompare(ViewInfo view, int x, int y)
+        {
+            var viewType = (MemoryCompareControl.ViewTypes)view.Tag;
+            var otherViews = (List<MemoryCompareControl>)view.Tag2;
+
+            AddSelection(view, 0, y, view.Font.Height);
+
+            var origX = x;
+            var origY = y;
+
+            x = AddOpenClose(view, x, y);
+
+            var tx = x;
+
+            x = AddIcon(view, x, y, Icons.Class, -1, HotSpotType.None);
+            // x = AddText(view, x, y, view.Settings.OffsetColor, 0, AddressFormula) + view.Font.Width;
+
+            x = AddText(view, x, y, view.Settings.TypeColor, HotSpot.NoneId, "Class") + view.Font.Width;
+            x = AddText(view, x, y, view.Settings.NameColor, HotSpot.NameId, Name) + view.Font.Width;
+            // x = AddText(view, x, y, view.Settings.ValueColor, HotSpot.NoneId, $"[{MemorySize}]") + view.Font.Width;
+            // x = AddComment(view, x, y);
+
+            y += view.Font.Height;
+
+            var size = new Size(x - origX, y - origY);
+
+            if (levelsOpen[view.Level])
+            {
+                var childOffset = tx - origX;
+
+                var nv = view.Clone();
+                nv.Level++;
+                foreach (var node in Nodes)
+                {
+                    switch (node)
+                    {
+                        case BaseHexNode _:
+                            continue;
+                    }
+
+                    if (otherViews != null && viewType != MemoryCompareControl.ViewTypes.NotMatter)
+                    {
+                        if (viewType == MemoryCompareControl.ViewTypes.Matches)
+                        {
+                            byte[] toCheck = view.Memory.ReadBytes(node.Offset, node.MemorySize);
+                            if (!otherViews.All(v => v.Memory.ReadBytes(node.Offset, node.MemorySize).SequenceEqual(toCheck)))
+                                continue;
+                        }
+                        else if (viewType == MemoryCompareControl.ViewTypes.Matches)
+                        {
+                            byte[] toCheck = view.Memory.ReadBytes(node.Offset, node.MemorySize);
+                            if (!otherViews.Any(v => v.Memory.ReadBytes(node.Offset, node.MemorySize).SequenceEqual(toCheck)))
+                                continue;
+                        }
+                    }
+
+                    // Draw the node if it is in the visible area.
+                    if (view.ClientArea.Contains(tx, y))
+                    {
+                        var innerSize = node.DrawCompare(nv, tx, y);
+                        
+                        size = Utils.AggregateNodeSizes(size, innerSize.Extend(childOffset, 0));
+
+                        y += innerSize.Height;
+                    }
+                    else
+                    {
+                        // Otherwise calculate the height...
+                        var calculatedHeight = node.CalculateDrawnHeight(nv);
+
+                        // and check if the node area overlaps with the visible area...
+                        if (new Rectangle(tx, y, 9999999, calculatedHeight).IntersectsWith(view.ClientArea))
+                        {
+                            // then draw the node...
+                            var innerSize = node.DrawCompare(nv, tx, y);
+
+                            size = Utils.AggregateNodeSizes(size, innerSize.Extend(childOffset, 0));
+
+                            y += innerSize.Height;
+                        }
+                        else
+                        {
+                            // or skip drawing and just use the calculated height.
+                            size = Utils.AggregateNodeSizes(size, new Size(0, calculatedHeight));
+
+                            y += calculatedHeight;
+                        }
+                    }
+                }
+            }
+
+            return size;
+        }
+
+        public override int CalculateDrawnHeight(ViewInfo view)
 		{
 			if (IsHidden)
 			{

@@ -73,7 +73,12 @@ namespace ReClassNET.Nodes
 			return size;
 		}
 
-		public override int CalculateDrawnHeight(ViewInfo view)
+        public override Size DrawCompare(ViewInfo view, int x, int y)
+        {
+            return Draw(view, x, y);
+        }
+
+        public override int CalculateDrawnHeight(ViewInfo view)
 		{
 			if (IsHidden)
 			{

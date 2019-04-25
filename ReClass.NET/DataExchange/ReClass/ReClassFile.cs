@@ -318,7 +318,12 @@ namespace ReClassNET.DataExchange.ReClass
 			{
 				throw new NotImplementedException();
 			}
-		}
+
+            public override Size DrawCompare(ViewInfo view, int x, int y)
+            {
+                throw new NotImplementedException();
+            }
+        }
 
 		#region ReClass 2011 / ReClass 2013
 

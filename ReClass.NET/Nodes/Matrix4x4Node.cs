@@ -113,7 +113,12 @@ namespace ReClassNET.Nodes
 			});
 		}
 
-		protected override int CalculateValuesHeight(ViewInfo view)
+        public override Size DrawCompare(ViewInfo view, int x, int y)
+        {
+            return Draw(view, x, y);
+        }
+
+        protected override int CalculateValuesHeight(ViewInfo view)
 		{
 			return 4 * view.Font.Height;
 		}

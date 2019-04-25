@@ -14,5 +14,9 @@ namespace ReClassNET.Nodes
 		{
 			return DrawText(view, x, y, "Text8Ptr");
 		}
-	}
+        public override Size DrawCompare(ViewInfo view, int x, int y)
+        {
+            return Draw(view, x, y);
+        }
+    }
 }

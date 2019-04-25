@@ -126,6 +126,7 @@
             this.processInformationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.memorySearcherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.namedAddressesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.classCompareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.loadSymbolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadSymbolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -134,14 +135,14 @@
             this.suspendProcessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.terminateProcessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.projectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addNewClassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.cleanUnusedClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.generateCppCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generateCSharpCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addNewClassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -1075,6 +1076,7 @@
             this.processInformationsToolStripMenuItem,
             this.memorySearcherToolStripMenuItem,
             this.namedAddressesToolStripMenuItem,
+            this.classCompareToolStripMenuItem,
             this.toolStripSeparator17,
             this.loadSymbolToolStripMenuItem,
             this.loadSymbolsToolStripMenuItem,
@@ -1109,6 +1111,13 @@
             this.namedAddressesToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.namedAddressesToolStripMenuItem.Text = "Named Addresses...";
             this.namedAddressesToolStripMenuItem.Click += new System.EventHandler(this.namedAddressesToolStripMenuItem_Click);
+            // 
+            // classCompareToolStripMenuItem
+            // 
+            this.classCompareToolStripMenuItem.Name = "classCompareToolStripMenuItem";
+            this.classCompareToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.classCompareToolStripMenuItem.Text = "Class Compare";
+            this.classCompareToolStripMenuItem.Click += new System.EventHandler(this.classCompareToolStripMenuItem_Click);
             // 
             // toolStripSeparator17
             // 
@@ -1173,6 +1182,19 @@
             this.projectToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.projectToolStripMenuItem.Text = "Project";
             // 
+            // addNewClassToolStripMenuItem
+            // 
+            this.addNewClassToolStripMenuItem.Image = global::ReClassNET.Properties.Resources.B16x16_Button_Class_Add;
+            this.addNewClassToolStripMenuItem.Name = "addNewClassToolStripMenuItem";
+            this.addNewClassToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.addNewClassToolStripMenuItem.Text = "Add new class";
+            this.addNewClassToolStripMenuItem.Click += new System.EventHandler(this.addNewClassToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator20
+            // 
+            this.toolStripSeparator20.Name = "toolStripSeparator20";
+            this.toolStripSeparator20.Size = new System.Drawing.Size(195, 6);
+            // 
             // cleanUnusedClassesToolStripMenuItem
             // 
             this.cleanUnusedClassesToolStripMenuItem.Image = global::ReClassNET.Properties.Resources.B16x16_Chart_Delete;
@@ -1218,19 +1240,6 @@
             this.aboutToolStripMenuItem.Text = "About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // addNewClassToolStripMenuItem
-            // 
-            this.addNewClassToolStripMenuItem.Image = global::ReClassNET.Properties.Resources.B16x16_Button_Class_Add;
-            this.addNewClassToolStripMenuItem.Name = "addNewClassToolStripMenuItem";
-            this.addNewClassToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.addNewClassToolStripMenuItem.Text = "Add new class";
-            this.addNewClassToolStripMenuItem.Click += new System.EventHandler(this.addNewClassToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator20
-            // 
-            this.toolStripSeparator20.Name = "toolStripSeparator20";
-            this.toolStripSeparator20.Size = new System.Drawing.Size(195, 6);
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1244,6 +1253,7 @@
             this.MainMenuStrip = this.mainMenuStrip;
             this.MinimumSize = new System.Drawing.Size(200, 100);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ReClass.NET";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
@@ -1378,6 +1388,7 @@
 		private System.Windows.Forms.ToolStripMenuItem namedAddressesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addNewClassToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
+        private System.Windows.Forms.ToolStripMenuItem classCompareToolStripMenuItem;
     }
 }
 

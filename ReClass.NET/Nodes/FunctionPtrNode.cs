@@ -16,5 +16,10 @@ namespace ReClassNET.Nodes
 		{
 			return Draw(view, x, y, "FunctionPtr", Name);
 		}
-	}
+
+        public override Size DrawCompare(ViewInfo view, int x, int y)
+        {
+            return Draw(view, x, y);
+        }
+    }
 }

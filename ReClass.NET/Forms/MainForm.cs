@@ -43,7 +43,7 @@ namespace ReClassNET.Forms
 
 			InitializeComponent();
 
-			Text = $"{Constants.ApplicationName} (x64)";
+			// Text = $"{Constants.ApplicationName}";
 
 			mainMenuStrip.Renderer = new CustomToolStripProfessionalRenderer(true, true);
 			toolStrip.Renderer = new CustomToolStripProfessionalRenderer(true, false);
@@ -304,7 +304,12 @@ namespace ReClassNET.Forms
 			new ProcessInfoForm().Show();
 		}
 
-		private void memorySearcherToolStripMenuItem_Click(object sender, EventArgs e)
+        private void classCompareToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ClassCompare(currentProject.Classes).Show();
+        }
+
+        private void memorySearcherToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			new ScannerForm().Show();
 		}
@@ -784,5 +789,7 @@ namespace ReClassNET.Forms
         {
             LinkedWindowFeatures.CreateDefaultClass();
         }
+
+        
     }
 }

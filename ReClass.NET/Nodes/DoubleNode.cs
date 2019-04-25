@@ -13,7 +13,12 @@ namespace ReClassNET.Nodes
 			return DrawNumeric(view, x, y, Icons.Double, "Double", ReadValueFromMemory(view.Memory).ToString("0.000"), null);
 		}
 
-		public override void Update(HotSpot spot)
+        public override Size DrawCompare(ViewInfo view, int x, int y)
+        {
+            return Draw(view, x, y);
+        }
+
+        public override void Update(HotSpot spot)
 		{
 			base.Update(spot);
 

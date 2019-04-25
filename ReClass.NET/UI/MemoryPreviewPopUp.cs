@@ -63,7 +63,7 @@ namespace ReClassNET.UI
             private void SetNodeCount(int count)
 			{
                 // Convert to 32Node (Just clear and [if (nodes.Count < count)] will exec)
-                if (!Program.TargetProcessIs64 && nodes[0] is Hex64Node)
+                if (!Program.TargetProcessIs64 && nodes.Count > 0 && nodes[0] is Hex64Node)
                     nodes.Clear();
 
                 if (nodes.Count < count)

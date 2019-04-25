@@ -93,7 +93,6 @@ namespace ReClassNET.UI
 			editBox.Font = font;
 			memoryPreviewPopUp = new MemoryPreviewPopUp(font);
             keyBoard = new KeyBoardManager();
-            keyBoard.KeysCodesToHandle.Add(WindowsInput.Native.VirtualKeyCode.CONTROL);
         }
 
 		protected override void OnLoad(EventArgs e)
@@ -1356,5 +1355,5 @@ namespace ReClassNET.UI
 
 			LinkedWindowFeatures.FindWhatInteractsWithAddress(selectedNode.Address, selectedNode.Node.MemorySize, writeOnly);
 		}
-	}
+    }
 }

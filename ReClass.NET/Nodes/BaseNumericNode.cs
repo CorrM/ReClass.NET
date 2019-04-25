@@ -55,7 +55,47 @@ namespace ReClassNET.Nodes
 			return new Size(x - origX, view.Font.Height);
 		}
 
-		public override int CalculateDrawnHeight(ViewInfo view)
+        protected Size DrawNumericCompare(ViewInfo view, int x, int y, Image icon, string type, string value, string alternativeValue)
+        {
+            Contract.Requires(view != null);
+            Contract.Requires(icon != null);
+            Contract.Requires(type != null);
+            Contract.Requires(value != null);
+
+            if (IsHidden)
+            {
+                return DrawHidden(view, x, y);
+            }
+
+            // DrawInvalidMemoryIndicator(view, y);
+
+            var origX = x;
+
+            AddSelection(view, x, y, view.Font.Height);
+
+            x += TextPadding;
+
+            //x = AddIcon(view, x, y, icon, HotSpot.NoneId, HotSpotType.None);
+            x = AddAddressOffset(view, x, y, true, false);
+
+            x = AddText(view, x, y, view.Settings.TypeColor, HotSpot.NoneId, type) + view.Font.Width;
+            x = AddText(view, x, y, view.Settings.NameColor, HotSpot.NameId, Name) + view.Font.Width;
+            x = AddText(view, x, y, view.Settings.NameColor, HotSpot.NoneId, "=") + view.Font.Width;
+            x = AddText(view, x, y, view.Settings.ValueColor, 0, value) + view.Font.Width;
+            if (alternativeValue != null)
+            {
+                x = AddText(view, x, y, view.Settings.ValueColor, 1, alternativeValue) + view.Font.Width;
+            }
+
+            // x = AddComment(view, x, y);
+
+            // AddTypeDrop(view, y);
+            // AddDelete(view, y);
+
+            return new Size(x - origX, view.Font.Height);
+        }
+
+        public override int CalculateDrawnHeight(ViewInfo view)
 		{
 			return IsHidden ? HiddenHeight : view.Font.Height;
 		}

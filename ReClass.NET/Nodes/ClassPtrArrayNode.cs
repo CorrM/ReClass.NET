@@ -26,7 +26,12 @@ namespace ReClassNET.Nodes
 			return Draw(view, x, y, "PtrArray", HotSpotType.ChangeType);
 		}
 
-		protected override Size DrawChild(ViewInfo view, int x, int y)
+        public override Size DrawCompare(ViewInfo view, int x, int y)
+        {
+            return Draw(view, x, y);
+        }
+
+        protected override Size DrawChild(ViewInfo view, int x, int y)
 		{
 			var ptr = view.Memory.ReadIntPtr(Offset + IntPtr.Size * CurrentIndex);
 

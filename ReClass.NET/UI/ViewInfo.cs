@@ -21,7 +21,10 @@ namespace ReClassNET.UI
 		public int Level { get; set; }
 		public bool MultipleNodesSelected { get; set; }
 
-		public ViewInfo Clone()
+        public object Tag { get; set; }
+        public object Tag2 { get; set; }
+
+        public ViewInfo Clone()
 		{
 			return new ViewInfo
 			{
