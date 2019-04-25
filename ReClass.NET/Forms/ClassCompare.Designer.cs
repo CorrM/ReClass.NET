@@ -55,7 +55,7 @@
             // bannerBox
             // 
             this.bannerBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.bannerBox.Icon = global::ReClassNET.Properties.Resources.B32x32_Plugin;
+            this.bannerBox.Icon = global::ReClassNET.Properties.Resources.compare32x32;
             this.bannerBox.Location = new System.Drawing.Point(0, 0);
             this.bannerBox.Name = "bannerBox";
             this.bannerBox.Size = new System.Drawing.Size(704, 48);

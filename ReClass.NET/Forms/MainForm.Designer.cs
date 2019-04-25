@@ -1114,6 +1114,7 @@
             // 
             // classCompareToolStripMenuItem
             // 
+            this.classCompareToolStripMenuItem.Image = global::ReClassNET.Properties.Resources.compare16x16;
             this.classCompareToolStripMenuItem.Name = "classCompareToolStripMenuItem";
             this.classCompareToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.classCompareToolStripMenuItem.Text = "Class Compare";
