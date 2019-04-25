@@ -57,7 +57,51 @@ namespace ReClassNET.Nodes
 			return new Size(x - origX, view.Font.Height);
 		}
 
-		public override int CalculateDrawnHeight(ViewInfo view)
+        /// <summary>Draws this node.</summary>
+		/// <param name="view">The view information.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="type">The name of the type.</param>
+		/// <returns>The pixel size the node occupies.</returns>
+		public Size DrawTextCompare(ViewInfo view, int x, int y, string type)
+        {
+            Contract.Requires(view != null);
+            Contract.Requires(type != null);
+
+            if (IsHidden)
+            {
+                return DrawHidden(view, x, y);
+            }
+
+            var ptr = view.Memory.ReadIntPtr(Offset);
+            var text = view.Memory.Process.ReadRemoteString(Encoding, ptr, 64);
+
+            // DrawInvalidMemoryIndicator(view, y);
+
+            var origX = x;
+
+            AddSelection(view, x, y, view.Font.Height);
+
+            x += TextPadding;
+            // x = AddIcon(view, x, y, Icons.Text, HotSpot.NoneId, HotSpotType.None);
+            x = AddAddressOffset(view, x, y, true, false);
+
+            x = AddText(view, x, y, view.Settings.TypeColor, HotSpot.NoneId, type) + view.Font.Width;
+            x = AddText(view, x, y, view.Settings.NameColor, HotSpot.NameId, Name) + view.Font.Width;
+
+            x = AddText(view, x, y, view.Settings.TextColor, HotSpot.NoneId, "= '");
+            x = AddText(view, x, y, view.Settings.TextColor, HotSpot.NoneId, text);
+            x = AddText(view, x, y, view.Settings.TextColor, HotSpot.NoneId, "'") + view.Font.Width;
+
+            // x = AddComment(view, x, y);
+
+            // AddTypeDrop(view, y);
+            // AddDelete(view, y);
+
+            return new Size(x - origX, view.Font.Height);
+        }
+
+        public override int CalculateDrawnHeight(ViewInfo view)
 		{
 			return IsHidden ? HiddenHeight : view.Font.Height;
 		}

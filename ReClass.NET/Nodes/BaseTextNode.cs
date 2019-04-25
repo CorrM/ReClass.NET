@@ -67,7 +67,49 @@ namespace ReClassNET.Nodes
 			return new Size(x - origX, view.Font.Height);
 		}
 
-		public override int CalculateDrawnHeight(ViewInfo view)
+        protected Size DrawTextCompare(ViewInfo view, int x, int y, string type)
+        {
+            Contract.Requires(view != null);
+            Contract.Requires(type != null);
+
+            if (IsHidden)
+            {
+                return DrawHidden(view, x, y);
+            }
+
+            var length = MemorySize / CharacterSize;
+            var text = ReadValueFromMemory(view.Memory);
+
+            // DrawInvalidMemoryIndicator(view, y);
+
+            var origX = x;
+
+            AddSelection(view, x, y, view.Font.Height);
+
+            x += TextPadding;
+            // x = AddIcon(view, x, y, Icons.Text, HotSpot.NoneId, HotSpotType.None);
+            x = AddAddressOffset(view, x, y, true, false);
+
+            x = AddText(view, x, y, view.Settings.TypeColor, HotSpot.NoneId, type) + view.Font.Width;
+            x = AddText(view, x, y, view.Settings.NameColor, HotSpot.NameId, Name);
+            x = AddText(view, x, y, view.Settings.IndexColor, HotSpot.NoneId, "[");
+            x = AddText(view, x, y, view.Settings.IndexColor, 0, length.ToString());
+            x = AddText(view, x, y, view.Settings.IndexColor, HotSpot.NoneId, "]") + view.Font.Width;
+
+            x = AddText(view, x, y, view.Settings.TextColor, HotSpot.NoneId, "= '");
+            x = AddText(view, x, y, view.Settings.TextColor, 1, text.LimitLength(150));
+            x = AddText(view, x, y, view.Settings.TextColor, HotSpot.NoneId, "'") + view.Font.Width;
+
+            // x = AddComment(view, x, y);
+
+            // AddTypeDrop(view, y);
+            // AddDelete(view, y);
+
+            return new Size(x - origX, view.Font.Height);
+        }
+
+
+        public override int CalculateDrawnHeight(ViewInfo view)
 		{
 			return IsHidden ? HiddenHeight : view.Font.Height;
 		}

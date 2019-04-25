@@ -15,7 +15,7 @@ namespace ReClassNET.Nodes
 
         public override Size DrawCompare(ViewInfo view, int x, int y)
         {
-            return Draw(view, x, y);
+            return DrawNumericCompare(view, x, y, Icons.Double, "Double", ReadValueFromMemory(view.Memory).ToString("0.000"), null);
         }
 
         public override void Update(HotSpot spot)

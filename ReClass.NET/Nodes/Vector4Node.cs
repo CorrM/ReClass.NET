@@ -46,9 +46,22 @@ namespace ReClassNET.Nodes
 			});
 		}
 
-        public override Size DrawCompare(ViewInfo view, int x, int y)
+        public override Size DrawCompare(ViewInfo view, int x2, int y2)
         {
-            return Draw(view, x, y);
+            return DrawVectorTypeCompare(view, x2, y2, "Vector4", (ref int x, ref int y) =>
+            {
+                var value = view.Memory.ReadObject<Vector4Data>(Offset);
+
+                x = AddText(view, x, y, view.Settings.NameColor, HotSpot.NoneId, "(");
+                x = AddText(view, x, y, view.Settings.ValueColor, 0, $"{value.X:0.000}");
+                x = AddText(view, x, y, view.Settings.NameColor, HotSpot.NoneId, ",");
+                x = AddText(view, x, y, view.Settings.ValueColor, 1, $"{value.Y:0.000}");
+                x = AddText(view, x, y, view.Settings.NameColor, HotSpot.NoneId, ",");
+                x = AddText(view, x, y, view.Settings.ValueColor, 2, $"{value.Z:0.000}");
+                x = AddText(view, x, y, view.Settings.NameColor, HotSpot.NoneId, ",");
+                x = AddText(view, x, y, view.Settings.ValueColor, 3, $"{value.W:0.000}");
+                x = AddText(view, x, y, view.Settings.NameColor, HotSpot.NoneId, ")");
+            });
         }
 
         protected override int CalculateValuesHeight(ViewInfo view)
