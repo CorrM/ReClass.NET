@@ -89,6 +89,10 @@ namespace ReClassNET.UI
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool ComparePointer { get; set; }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IntPtr ClassOffset;
 
         public IEnumerable<BaseNode> SelectedNodes => selectedNodes.Select(s => s.Node);
@@ -171,7 +175,8 @@ namespace ReClassNET.UI
                 MultipleNodesSelected = selectedNodes.Count > 1,
                 HotSpots = hotSpots,
                 Tag = ViewType,
-                Tag2 = OtherMemCompareControls
+                Tag2 = OtherMemCompareControls,
+                ComparePointer = ComparePointer
             };
 
 			try

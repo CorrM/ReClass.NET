@@ -211,5 +211,13 @@ namespace ReClassNET.Forms
             try { newOffset = new IntPtr(Convert.ToInt32(ci.AddressBox.Text, 16)); } catch (Exception) { }
             ci.ViewBox.ClassOffset = newOffset;
         }
+
+        private void PointerCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (var item in CompareItems.Select(i => i.ViewBox))
+            {
+                item.ComparePointer = PointerCheck.Checked;
+            }
+        }
     }
 }

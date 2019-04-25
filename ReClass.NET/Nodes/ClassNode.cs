@@ -198,21 +198,29 @@ namespace ReClassNET.Nodes
                             continue;
                     }
 
-                    if (otherViews != null && viewType != MemoryCompareControl.ViewTypes.NotMatter)
+                    if (node is ClassPtrNode && !view.ComparePointer)
                     {
-                        if (viewType == MemoryCompareControl.ViewTypes.Matches)
+                        // Don't do anything
+                    }
+                    else
+                    {
+                        if (otherViews != null && viewType != MemoryCompareControl.ViewTypes.NotMatter)
                         {
-                            byte[] toCheck = view.Memory.ReadBytes(node.Offset, node.MemorySize);
-                            if (!otherViews.All(v => v.Memory.ReadBytes(node.Offset, node.MemorySize).SequenceEqual(toCheck)))
-                                continue;
-                        }
-                        else if (viewType == MemoryCompareControl.ViewTypes.Matches)
-                        {
-                            byte[] toCheck = view.Memory.ReadBytes(node.Offset, node.MemorySize);
-                            if (!otherViews.Any(v => v.Memory.ReadBytes(node.Offset, node.MemorySize).SequenceEqual(toCheck)))
-                                continue;
+                            if (viewType == MemoryCompareControl.ViewTypes.Matches)
+                            {
+                                byte[] toCheck = view.Memory.ReadBytes(node.Offset, node.MemorySize);
+                                if (!otherViews.All(v => v.Memory.ReadBytes(node.Offset, node.MemorySize).SequenceEqual(toCheck)))
+                                    continue;
+                            }
+                            else if (viewType == MemoryCompareControl.ViewTypes.NotMatches)
+                            {
+                                byte[] toCheck = view.Memory.ReadBytes(node.Offset, node.MemorySize);
+                                if (!otherViews.Any(v => v.Memory.ReadBytes(node.Offset, node.MemorySize).SequenceEqual(toCheck)))
+                                    continue;
+                            }
                         }
                     }
+                    
 
                     // Draw the node if it is in the visible area.
                     if (view.ClientArea.Contains(tx, y))
