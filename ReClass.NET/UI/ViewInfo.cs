@@ -37,8 +37,10 @@ namespace ReClassNET.UI
 				Classes = Classes,
 				Address = Address,
 				Level = Level,
-				MultipleNodesSelected = MultipleNodesSelected
-			};
+				MultipleNodesSelected = MultipleNodesSelected,
+                Tag = Tag,
+                Tag2 = Tag2
+            };
 		}
 	}
 }
