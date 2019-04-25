@@ -1,8 +1,12 @@
 # ReClass.NET
 This is a port of ReClass to the .NET platform with lots of additional features.
-
-![](https://abload.de/img/main4hsbj.jpg)
 https://github.com/ReClassNET/ReClass.NET/blob/master/README.md
+
+## New Features
+- Kernal Memory Option (Read/Write)
+- Class Compare
+- x64 only
+  - Can Access 32/64bit Process
 
 ## Authors / Special Thanks
 - [KN4CK3R](https://github.com/KN4CK3R)
