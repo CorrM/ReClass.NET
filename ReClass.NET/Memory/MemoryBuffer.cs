@@ -460,7 +460,7 @@ namespace ReClassNET.Memory
 		{
 			Contract.Requires(offset >= 0);
 
-            if (Program.TargetProcessIs64)
+            if (Program.RemoteProcess.Is64)
                 return (IntPtr)ReadInt64(offset);
             else
                 return (IntPtr)ReadInt32(offset);

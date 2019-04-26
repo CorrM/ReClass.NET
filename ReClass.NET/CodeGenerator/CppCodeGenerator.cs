@@ -80,7 +80,7 @@ namespace ReClassNET.CodeGenerator
 						csb.AppendLine();
 
                         List<BaseNode> newNodes = new List<BaseNode>(c.Nodes);
-                        if (ptrIs64Bit && !Program.TargetProcessIs64) // Game Is x86 and user need ptrIs64Bit (8byte)
+                        if (ptrIs64Bit && !Program.RemoteProcess.Is64) // Game Is x86 and user need ptrIs64Bit (8byte)
                         {
                             List<int> IndexsToRmv = new List<int>();
                             for (int i = 0; i < newNodes.Count; i++)

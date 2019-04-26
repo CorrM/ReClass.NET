@@ -71,7 +71,7 @@ namespace ReClassNET.AddressParser
 					if (long.TryParse(buffer, NumberStyles.HexNumber, null, out var offsetValue))
 					{
                         IntPtr address;
-                        if (Program.TargetProcessIs64)
+                        if (Program.RemoteProcess.Is64)
                             address = (IntPtr)offsetValue;
                         else
                             address = (IntPtr)unchecked((int)offsetValue);

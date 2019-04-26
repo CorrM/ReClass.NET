@@ -175,7 +175,7 @@ namespace ReClassNET.DataExchange.ReClass
 					while (size != 0)
 					{
 						BaseNode paddingNode;
-                        if (Program.TargetProcessIs64)
+                        if (Program.RemoteProcess.Is64)
                         {
                             if (size >= 8)
                             {

@@ -645,7 +645,7 @@ namespace ReClassNET.Forms
 
 			long.TryParse(startAddressTextBox.Text, NumberStyles.HexNumber, null, out var startAddressVar);
 			long.TryParse(stopAddressTextBox.Text, NumberStyles.HexNumber, null, out var endAddressVar);
-            if (Program.TargetProcessIs64)
+            if (Program.RemoteProcess.Is64)
             {
                 settings.StartAddress = unchecked((IntPtr)startAddressVar);
                 settings.StopAddress = unchecked((IntPtr)endAddressVar);

@@ -12,7 +12,7 @@ namespace ReClassNET.MemoryScanner
 	public class ScanSettings
 	{
 		public IntPtr StartAddress { get; set; } = IntPtr.Zero;
-		public IntPtr StopAddress { get; set; } = Program.TargetProcessIs64 ? (IntPtr)long.MaxValue : (IntPtr)int.MaxValue;
+		public IntPtr StopAddress { get; set; } = Program.RemoteProcess.Is64 ? (IntPtr)long.MaxValue : (IntPtr)int.MaxValue;
         public SettingState ScanWritableMemory { get; set; } = SettingState.Yes;
 		public SettingState ScanExecutableMemory { get; set; } = SettingState.Indeterminate;
 		public SettingState ScanCopyOnWriteMemory { get; set; } = SettingState.No;

@@ -131,7 +131,7 @@ namespace ReClassNET.Debugger
 
 			while (size > 0)
 			{
-                if (Program.TargetProcessIs64)
+                if (Program.RemoteProcess.Is64)
                 {
                     if (size >= 8)
                     {

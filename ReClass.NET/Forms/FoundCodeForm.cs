@@ -102,7 +102,7 @@ namespace ReClassNET.Forms
 
 			sb.AppendLine();
 
-            if (Program.TargetProcessIs64)
+            if (Program.RemoteProcess.Is64)
             {
                 sb.AppendLine($"RAX = {info.DebugInfo.Registers.Rax.ToString(Constants.AddressHexFormat)}");
                 sb.AppendLine($"RBX = {info.DebugInfo.Registers.Rbx.ToString(Constants.AddressHexFormat)}");

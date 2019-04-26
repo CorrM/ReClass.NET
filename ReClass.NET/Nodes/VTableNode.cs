@@ -11,7 +11,7 @@ namespace ReClassNET.Nodes
 	{
 		private readonly MemoryBuffer memory = new MemoryBuffer();
 
-		public override int MemorySize { get; set; } = Program.TargetProcessIs64 ? 8 : 4;
+		public override int MemorySize { get; set; } = Program.RemoteProcess.Is64 ? 8 : 4;
 
 		public override void Intialize()
 		{

@@ -376,7 +376,7 @@ namespace ReClassNET.Forms
 		private void generateCppCodeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
             bool ptrIs64Bit = MessageBox.Show($"Pointer is 64bit (8byte) .?", "Pointer Size", MessageBoxButtons.YesNo) == DialogResult.Yes;
-            if (ptrIs64Bit && !Program.TargetProcessIs64)
+            if (ptrIs64Bit && !Program.RemoteProcess.Is64)
                 MessageBox.Show("You targeting (x84) Process, so make sure u have 4bytes after every ClassPtr.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			ShowCodeForm(new CppCodeGenerator(ptrIs64Bit));
 		}
@@ -408,9 +408,9 @@ namespace ReClassNET.Forms
 					if (pb.SelectedProcess != null)
 					{
                         // Is 64Bit
-                        Program.TargetProcessIs64 = System.Diagnostics.Process.GetProcessById(pb.SelectedProcess.Id.ToInt32()).Is64BitProcess();
+                        Program.RemoteProcess.Is64 = System.Diagnostics.Process.GetProcessById(pb.SelectedProcess.Id.ToInt32()).Is64BitProcess();
 
-                        if (Program.TargetProcessIs64)
+                        if (Program.RemoteProcess.Is64)
                         {
                             Constants.Platform = "x64";
                             Constants.AddressHexFormat = "X016";

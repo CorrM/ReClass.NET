@@ -195,7 +195,7 @@ namespace ReClassNET.Nodes
 			while (size != 0)
 			{
 				BaseNode node;
-                if (Program.TargetProcessIs64)
+                if (Program.RemoteProcess.Is64)
                 {
                     if (size >= 8)
                     {

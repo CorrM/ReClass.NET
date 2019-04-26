@@ -21,7 +21,9 @@ namespace ReClassNET.Memory
 
 	public class RemoteProcess : IDisposable
 	{
-		private readonly object processSync = new object();
+        public bool Is64 { get; set; } = false;
+
+        private readonly object processSync = new object();
 
 		private readonly CoreFunctionsManager coreFunctions;
 

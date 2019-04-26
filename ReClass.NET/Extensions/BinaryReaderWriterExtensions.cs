@@ -9,7 +9,7 @@ namespace ReClassNET.Extensions
 		public static IntPtr ReadIntPtr(this BinaryReader br)
 		{
 			Contract.Requires(br != null);
-            if (Program.TargetProcessIs64)
+            if (Program.RemoteProcess.Is64)
                 return (IntPtr)br.ReadInt64();
             else
                 return (IntPtr)br.ReadInt32();
@@ -19,7 +19,7 @@ namespace ReClassNET.Extensions
 		{
 			Contract.Requires(bw != null);
 
-            if (Program.TargetProcessIs64)
+            if (Program.RemoteProcess.Is64)
                 bw.Write(value.ToInt64());
             else
                 bw.Write(value.ToInt32());

@@ -52,7 +52,7 @@ namespace ReClassNET.UI
 
             private BaseHexNode CreateNode(int index)
             {
-                if (Program.TargetProcessIs64)
+                if (Program.RemoteProcess.Is64)
                     return new Hex64Node { Offset = (IntPtr)(index * 8) };
                 else
                     return new Hex32Node { Offset = (IntPtr)(index * 4) };
@@ -63,7 +63,7 @@ namespace ReClassNET.UI
             private void SetNodeCount(int count)
 			{
                 // Convert to 32Node (Just clear and [if (nodes.Count < count)] will exec)
-                if (!Program.TargetProcessIs64 && nodes.Count > 0 && nodes[0] is Hex64Node)
+                if (!Program.RemoteProcess.Is64 && nodes.Count > 0 && nodes[0] is Hex64Node)
                     nodes.Clear();
 
                 if (nodes.Count < count)

@@ -55,7 +55,7 @@ namespace ReClassNET.Memory
 
 			if (is8ByteAligned)
 			{
-                if (Program.TargetProcessIs64)
+                if (Program.RemoteProcess.Is64)
                 {
                     var pointerType = GuessPointerType(data64.IntPtr, memory);
                     if (pointerType != null)

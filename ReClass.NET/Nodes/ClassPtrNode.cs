@@ -14,7 +14,7 @@ namespace ReClassNET.Nodes
 	{
 		private readonly MemoryBuffer memory = new MemoryBuffer();
 
-		public override int MemorySize { get; set; } = Program.TargetProcessIs64 ? 8 : 4;
+		public override int MemorySize { get; set; } = Program.RemoteProcess.Is64 ? 8 : 4;
 
 		public override bool PerformCycleCheck => false;
 
@@ -179,7 +179,7 @@ namespace ReClassNET.Nodes
 				if (spot.Text.TryGetHexString(out var hexValue) && long.TryParse(hexValue, NumberStyles.HexNumber, null, out var val))
 				{
                     IntPtr address;
-                    if (Program.TargetProcessIs64)
+                    if (Program.RemoteProcess.Is64)
                         address = (IntPtr)val;
                     else
                         address = (IntPtr)unchecked((int)val);
