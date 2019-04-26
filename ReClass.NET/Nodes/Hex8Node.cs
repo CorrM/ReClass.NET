@@ -22,7 +22,7 @@ namespace ReClassNET.Nodes
 
         public override Size DrawCompare(ViewInfo view, int x, int y)
         {
-            return Draw(view, x, y);
+            return DrawCompare(view, x, y, view.Settings.ShowNodeText ? view.Memory.ReadPrintableAsciiString(Offset, 1) + "        " : null, 1);
         }
 
         public override void Update(HotSpot spot)

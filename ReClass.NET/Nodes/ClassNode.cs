@@ -192,14 +192,11 @@ namespace ReClassNET.Nodes
                 nv.Level++;
                 foreach (var node in Nodes)
                 {
-                    switch (node)
-                    {
-                        case BaseHexNode _:
-                            continue;
-                    }
+                    if (node is BaseHexNode && !view.ShowOptions.ShowHex)
+                        continue;
 
                     // Is Pointer and Don't compare
-                    if (node is ClassPtrNode && !view.ComparePointer)
+                    if (node is ClassPtrNode && !view.ShowOptions.ComparePointer)
                     {
                         // Don't do anything
                     }

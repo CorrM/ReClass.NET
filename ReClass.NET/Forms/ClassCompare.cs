@@ -37,13 +37,15 @@ namespace ReClassNET.Forms
             {
                 Name = "ViewBox1",
                 Dock = DockStyle.Fill,
-                Memory = new MemoryBuffer() { Process = Program.RemoteProcess }
+                Memory = new MemoryBuffer() { Process = Program.RemoteProcess },
+                ShowOptions = new CompareOptions()
             };
             var ViewBox2 = new MemoryCompareControl()
             {
                 Name = "ViewBox2",
                 Dock = DockStyle.Fill,
-                Memory = new MemoryBuffer() { Process = Program.RemoteProcess }
+                Memory = new MemoryBuffer() { Process = Program.RemoteProcess },
+                ShowOptions = new CompareOptions()
             };
 
             // Events
@@ -112,6 +114,7 @@ namespace ReClassNET.Forms
                 Name = $"ViewBox{CompareItems.Count}",
                 Dock = DockStyle.Fill,
                 Memory = new MemoryBuffer() { Process = Program.RemoteProcess },
+                ShowOptions = new CompareOptions(),
                 ClassNode = Classes.FirstOrDefault(c => c.Name == ClassBox.Text)
             };
             viewBox.Leave += ViewBox_Leave;
@@ -224,7 +227,15 @@ namespace ReClassNET.Forms
         {
             foreach (var item in CompareItems.Select(i => i.ViewBox))
             {
-                item.ComparePointer = PointerCheck.Checked;
+                item.ShowOptions.ComparePointer = PointerCheck.Checked;
+            }
+        }
+
+        private void ShowHexBox_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (var item in CompareItems.Select(i => i.ViewBox))
+            {
+                item.ShowOptions.ShowHex = ShowHexBox.Checked;
             }
         }
     }

@@ -43,6 +43,8 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.PointerCheck = new System.Windows.Forms.CheckBox();
             this.ViewTypeBox = new System.Windows.Forms.ComboBox();
+            this.ShowHexBox = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.bannerBox)).BeginInit();
             this.addressPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -64,7 +66,7 @@
             // 
             this.ClassBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ClassBox.FormattingEnabled = true;
-            this.ClassBox.Location = new System.Drawing.Point(51, 16);
+            this.ClassBox.Location = new System.Drawing.Point(46, 16);
             this.ClassBox.Name = "ClassBox";
             this.ClassBox.Size = new System.Drawing.Size(134, 21);
             this.ClassBox.TabIndex = 0;
@@ -115,7 +117,7 @@
             // 
             // addAddressBox
             // 
-            this.addAddressBox.Location = new System.Drawing.Point(191, 16);
+            this.addAddressBox.Location = new System.Drawing.Point(182, 16);
             this.addAddressBox.Name = "addAddressBox";
             this.addAddressBox.Size = new System.Drawing.Size(23, 21);
             this.addAddressBox.TabIndex = 1;
@@ -125,7 +127,7 @@
             // 
             // removeAddressBox
             // 
-            this.removeAddressBox.Location = new System.Drawing.Point(215, 16);
+            this.removeAddressBox.Location = new System.Drawing.Point(206, 16);
             this.removeAddressBox.Name = "removeAddressBox";
             this.removeAddressBox.Size = new System.Drawing.Size(23, 21);
             this.removeAddressBox.TabIndex = 2;
@@ -143,7 +145,7 @@
             this.groupBox2.Controls.Add(this.addAddressBox);
             this.groupBox2.Location = new System.Drawing.Point(10, 49);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(248, 44);
+            this.groupBox2.Size = new System.Drawing.Size(232, 44);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Compare Options";
@@ -202,11 +204,35 @@
             this.ViewTypeBox.TabIndex = 1;
             this.ViewTypeBox.SelectedIndexChanged += new System.EventHandler(this.ViewTypeBox_SelectedIndexChanged);
             // 
+            // ShowHexBox
+            // 
+            this.ShowHexBox.AutoSize = true;
+            this.ShowHexBox.Location = new System.Drawing.Point(248, 54);
+            this.ShowHexBox.Name = "ShowHexBox";
+            this.ShowHexBox.Size = new System.Drawing.Size(74, 17);
+            this.ShowHexBox.TabIndex = 9;
+            this.ShowHexBox.Text = "Show Hex";
+            this.ShowHexBox.UseVisualStyleBackColor = true;
+            this.ShowHexBox.CheckedChanged += new System.EventHandler(this.ShowHexBox_CheckedChanged);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Enabled = false;
+            this.checkBox2.Location = new System.Drawing.Point(248, 76);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(82, 17);
+            this.checkBox2.TabIndex = 10;
+            this.checkBox2.Text = "Nothing Yet";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
             // ClassCompare
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 450);
+            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.ShowHexBox);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.LayoutPanel);
             this.Controls.Add(this.groupBox2);
@@ -225,6 +251,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -243,5 +270,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ComboBox ViewTypeBox;
         private System.Windows.Forms.CheckBox PointerCheck;
+        private System.Windows.Forms.CheckBox ShowHexBox;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }

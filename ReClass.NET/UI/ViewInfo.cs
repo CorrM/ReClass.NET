@@ -21,8 +21,7 @@ namespace ReClassNET.UI
 		public int Level { get; set; }
 		public bool MultipleNodesSelected { get; set; }
 
-
-        public bool ComparePointer { get; set; }
+        public CompareOptions ShowOptions { get; set; }
         public object Tag { get; set; }
         public object Tag2 { get; set; }
 
@@ -42,7 +41,7 @@ namespace ReClassNET.UI
 				MultipleNodesSelected = MultipleNodesSelected,
                 Tag = Tag,
                 Tag2 = Tag2,
-                ComparePointer = ComparePointer
+                ShowOptions = ShowOptions
             };
 		}
 	}

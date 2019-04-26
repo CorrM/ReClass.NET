@@ -89,11 +89,11 @@ namespace ReClassNET.UI
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool ComparePointer { get; set; }
+        public IntPtr ClassOffset;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public IntPtr ClassOffset;
+        public CompareOptions ShowOptions;
 
         public IEnumerable<BaseNode> SelectedNodes => selectedNodes.Select(s => s.Node);
 		public event EventHandler SelectionChanged;
@@ -176,7 +176,7 @@ namespace ReClassNET.UI
                 HotSpots = hotSpots,
                 Tag = ViewType,
                 Tag2 = OtherMemoryBuffer,
-                ComparePointer = ComparePointer
+                ShowOptions = ShowOptions
             };
 
 			try
