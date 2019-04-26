@@ -45,6 +45,8 @@
             this.ViewTypeBox = new System.Windows.Forms.ComboBox();
             this.ShowHexBox = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.bannerBox)).BeginInit();
             this.addressPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -172,7 +174,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.PointerCheck);
             this.groupBox3.Controls.Add(this.ViewTypeBox);
-            this.groupBox3.Location = new System.Drawing.Point(425, 49);
+            this.groupBox3.Location = new System.Drawing.Point(246, 49);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(270, 44);
             this.groupBox3.TabIndex = 8;
@@ -207,7 +209,7 @@
             // ShowHexBox
             // 
             this.ShowHexBox.AutoSize = true;
-            this.ShowHexBox.Location = new System.Drawing.Point(248, 54);
+            this.ShowHexBox.Location = new System.Drawing.Point(522, 55);
             this.ShowHexBox.Name = "ShowHexBox";
             this.ShowHexBox.Size = new System.Drawing.Size(74, 17);
             this.ShowHexBox.TabIndex = 9;
@@ -219,18 +221,42 @@
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.Enabled = false;
-            this.checkBox2.Location = new System.Drawing.Point(248, 76);
+            this.checkBox2.Location = new System.Drawing.Point(522, 76);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(82, 17);
             this.checkBox2.TabIndex = 10;
             this.checkBox2.Text = "Nothing Yet";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Enabled = false;
+            this.checkBox1.Location = new System.Drawing.Point(613, 55);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(82, 17);
+            this.checkBox1.TabIndex = 11;
+            this.checkBox1.Text = "Nothing Yet";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Enabled = false;
+            this.checkBox3.Location = new System.Drawing.Point(613, 76);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(82, 17);
+            this.checkBox3.TabIndex = 12;
+            this.checkBox3.Text = "Nothing Yet";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
             // ClassCompare
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 450);
+            this.Controls.Add(this.checkBox3);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.ShowHexBox);
             this.Controls.Add(this.groupBox3);
@@ -272,5 +298,7 @@
         private System.Windows.Forms.CheckBox PointerCheck;
         private System.Windows.Forms.CheckBox ShowHexBox;
         private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox3;
     }
 }

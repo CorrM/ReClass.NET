@@ -306,6 +306,10 @@ namespace ReClassNET.Forms
 
         private void classCompareToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // DeSelect
+            foreach (var item in memoryViewControl.SelectedNodes)
+                item.ClearSelection();
+
             new ClassCompare(currentProject.Classes).Show();
         }
 
