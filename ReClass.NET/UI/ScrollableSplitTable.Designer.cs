@@ -34,11 +34,9 @@
             // PanelControl
             // 
             this.PanelControl.AutoScroll = true;
-            this.PanelControl.AutoSize = true;
-            this.PanelControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.PanelControl.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.PanelControl.ColumnCount = 1;
-            this.PanelControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 484F));
+            this.PanelControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 485F));
             this.PanelControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.PanelControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelControl.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns;
@@ -58,7 +56,6 @@
             this.Name = "ScrollableSplitTable";
             this.Size = new System.Drawing.Size(482, 287);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

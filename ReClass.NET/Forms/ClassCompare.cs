@@ -160,10 +160,10 @@ namespace ReClassNET.Forms
             LayoutPanel.HorizontalScroll.LargeChange = CompareItems[0].ViewBox.HorizontalScroll.LargeChange;
             LayoutPanel.HorizontalScroll.Maximum = CompareItems[0].ViewBox.HorizontalScroll.Maximum;
 
-            var Other = CompareItems.Select(t => t.ViewBox).ToList();
-            foreach (var item in LayoutPanel.Panel.Controls.OfType<MemoryCompareControl>().ToArray())
+            var Other = CompareItems.Select(t => t.ViewBox.Memory).ToList();
+            foreach (var item in CompareItems.Select(i => i.ViewBox))
             {
-                item.OtherMemCompareControls = Other;
+                item.OtherMemoryBuffer = Other;
             }
         }
 

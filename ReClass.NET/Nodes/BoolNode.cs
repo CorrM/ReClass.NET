@@ -47,7 +47,34 @@ namespace ReClassNET.Nodes
 
         public override Size DrawCompare(ViewInfo view, int x, int y)
         {
-            return Draw(view, x, y);
+            if (IsHidden)
+            {
+                return DrawHidden(view, x, y);
+            }
+
+            //DrawInvalidMemoryIndicator(view, y);
+
+            var origX = x;
+
+            AddSelection(view, x, y, view.Font.Height);
+
+            x += TextPadding + Icons.Dimensions;
+
+            x = AddAddressOffset(view, x, y, true, false);
+
+            x = AddText(view, x, y, view.Settings.TypeColor, HotSpot.NoneId, "Bool") + view.Font.Width;
+            x = AddText(view, x, y, view.Settings.NameColor, HotSpot.NameId, Name) + view.Font.Width;
+            x = AddText(view, x, y, view.Settings.NameColor, HotSpot.NoneId, "=") + view.Font.Width;
+
+            var value = view.Memory.ReadUInt8(Offset);
+            x = AddText(view, x, y, view.Settings.ValueColor, 0, value == 0 ? "false" : "true") + view.Font.Width;
+
+            // x = AddComment(view, x, y);
+
+            // AddTypeDrop(view, y);
+            // AddDelete(view, y);
+
+            return new Size(x - origX, view.Font.Height);
         }
 
         public override int CalculateDrawnHeight(ViewInfo view)

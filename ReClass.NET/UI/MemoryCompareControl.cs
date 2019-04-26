@@ -85,7 +85,7 @@ namespace ReClassNET.UI
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public object OtherMemCompareControls { get; set; }
+        public List<MemoryBuffer> OtherMemoryBuffer { get; set; }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -175,12 +175,12 @@ namespace ReClassNET.UI
                 MultipleNodesSelected = selectedNodes.Count > 1,
                 HotSpots = hotSpots,
                 Tag = ViewType,
-                Tag2 = OtherMemCompareControls,
+                Tag2 = OtherMemoryBuffer,
                 ComparePointer = ComparePointer
             };
 
-			try
-			{
+			//try
+			//{
 				var drawnSize = ClassNode.DrawCompare(view, -HorizontalScroll.Value, -VerticalScroll.Value * font.Height);
 				drawnSize.Width += 50;
 
@@ -214,11 +214,11 @@ namespace ReClassNET.UI
 					HorizontalScroll.Enabled = false;
 					HorizontalScroll.Value = 0;
 				}
-			}
-			catch (Exception ex)
-			{
-				Debug.Assert(false);
-			}
+			//}
+			//catch (Exception ex)
+			//{
+			//	Debug.Assert(false);
+			//}
 		}
 
 		private void OnSelectionChanged()

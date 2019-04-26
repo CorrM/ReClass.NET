@@ -161,7 +161,7 @@ namespace ReClassNET.Nodes
         public override Size DrawCompare(ViewInfo view, int x, int y)
         {
             var viewType = (MemoryCompareControl.ViewTypes)view.Tag;
-            var otherViews = (List<MemoryCompareControl>)view.Tag2;
+            var otherViews = (List<MemoryBuffer>)view.Tag2;
 
             AddSelection(view, 0, y, view.Font.Height);
 
@@ -198,6 +198,7 @@ namespace ReClassNET.Nodes
                             continue;
                     }
 
+                    // Is Pointer and Don't compare
                     if (node is ClassPtrNode && !view.ComparePointer)
                     {
                         // Don't do anything
@@ -209,13 +210,13 @@ namespace ReClassNET.Nodes
                             if (viewType == MemoryCompareControl.ViewTypes.Matches)
                             {
                                 byte[] toCheck = view.Memory.ReadBytes(node.Offset, node.MemorySize);
-                                if (!otherViews.All(v => v.Memory.ReadBytes(node.Offset, node.MemorySize).SequenceEqual(toCheck)))
+                                if (!otherViews.All(M => M.ReadBytes(node.Offset, node.MemorySize).SequenceEqual(toCheck)))
                                     continue;
                             }
                             else if (viewType == MemoryCompareControl.ViewTypes.NotMatches)
                             {
                                 byte[] toCheck = view.Memory.ReadBytes(node.Offset, node.MemorySize);
-                                if (!otherViews.Any(v => v.Memory.ReadBytes(node.Offset, node.MemorySize).SequenceEqual(toCheck)))
+                                if (otherViews.All(M => M.ReadBytes(node.Offset, node.MemorySize).SequenceEqual(toCheck)))
                                     continue;
                             }
                         }

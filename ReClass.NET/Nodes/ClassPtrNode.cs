@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using ReClassNET.Extensions;
 using ReClassNET.Memory;
 using ReClassNET.UI;
@@ -84,6 +86,8 @@ namespace ReClassNET.Nodes
 
         public override Size DrawCompare(ViewInfo view, int x, int y)
         {
+            var viewType = (MemoryCompareControl.ViewTypes)view.Tag;
+            var otherViews = (List<MemoryBuffer>)view.Tag2;
             if (IsHidden)
             {
                 return DrawHidden(view, x, y);
@@ -107,7 +111,7 @@ namespace ReClassNET.Nodes
             // x = AddText(view, x, y, view.Settings.ValueColor, HotSpot.NoneId, $"<{InnerNode.Name}>") + view.Font.Width;
             // x = AddIcon(view, x, y, Icons.Change, 4, HotSpotType.ChangeType) + view.Font.Width;
 
-            var ptr = view.Memory.ReadIntPtr(Offset);
+            IntPtr ptr = view.Memory.ReadIntPtr(Offset);
 
             x = AddText(view, x, y, view.Settings.OffsetColor, HotSpot.NoneId, "->") + view.Font.Width;
             x = AddText(view, x, y, view.Settings.ValueColor, 0, "0x" + ptr.ToString(Constants.AddressHexFormat)) + view.Font.Width;
@@ -130,6 +134,17 @@ namespace ReClassNET.Nodes
                 var v = view.Clone();
                 v.Address = ptr;
                 v.Memory = memory;
+                v.Tag = viewType;
+                v.Tag2 = otherViews.Select(M => // Update all other MemoryBuffer
+                {
+                    var newMem = new MemoryBuffer(M);
+                    IntPtr newPtr = M.ReadIntPtr(Offset);
+                    newMem.Size = InnerNode.MemorySize;
+                    newMem.Process = view.Memory.Process;
+                    newMem.Update(newPtr);
+
+                    return newMem;
+                }).ToList();
 
                 var innerSize = InnerNode.DrawCompare(v, tx, y);
 
