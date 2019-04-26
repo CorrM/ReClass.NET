@@ -34,9 +34,9 @@
             // PanelControl
             // 
             this.PanelControl.AutoScroll = true;
-            this.PanelControl.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.PanelControl.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
             this.PanelControl.ColumnCount = 1;
-            this.PanelControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 485F));
+            this.PanelControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 490F));
             this.PanelControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.PanelControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelControl.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns;

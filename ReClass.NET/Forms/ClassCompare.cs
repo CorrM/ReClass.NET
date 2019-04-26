@@ -102,7 +102,6 @@ namespace ReClassNET.Forms
                 Name = $"Box{CompareItems.Count + 1}",
                 Location = newLoc,
                 PlaceholderText = "Address",
-                Font = Box1.Font,
                 Text = klass.Offset.ToString("X2")
             };
             newBox.TextChanged += AddressBox_TextChanged;
