@@ -179,8 +179,8 @@ namespace ReClassNET.UI
                 ComparePointer = ComparePointer
             };
 
-			//try
-			//{
+			try
+			{
 				var drawnSize = ClassNode.DrawCompare(view, -HorizontalScroll.Value, -VerticalScroll.Value * font.Height);
 				drawnSize.Width += 50;
 
@@ -214,11 +214,11 @@ namespace ReClassNET.UI
 					HorizontalScroll.Enabled = false;
 					HorizontalScroll.Value = 0;
 				}
-			//}
-			//catch (Exception ex)
-			//{
-			//	Debug.Assert(false);
-			//}
+			}
+			catch (Exception ex)
+			{
+				Debug.Assert(false);
+			}
 		}
 
 		private void OnSelectionChanged()
