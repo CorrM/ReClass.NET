@@ -8,6 +8,9 @@ https://github.com/ReClassNET/ReClass.NET/blob/master/README.md
 - x64 only
   - Can Access 32/64bit Process
 
+## ScreenShots
+![](https://github.com/CorrM/ReClass.NET/raw/master/img/Class%20Compare.png)
+
 ## Authors / Special Thanks
 - [KN4CK3R](https://github.com/KN4CK3R)
 - DrUnKeN ChEeTaH
