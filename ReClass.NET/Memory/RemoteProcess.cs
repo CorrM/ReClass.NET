@@ -21,8 +21,6 @@ namespace ReClassNET.Memory
 
 	public class RemoteProcess : IDisposable
 	{
-        public bool Is64 { get; set; } = false;
-
         private readonly object processSync = new object();
 
 		private readonly CoreFunctionsManager coreFunctions;
@@ -57,8 +55,10 @@ namespace ReClassNET.Memory
 
 		public SymbolStore Symbols => symbols;
 
-		/// <summary>Gets a copy of the current modules list. This list may change if the remote process (un)loads a module.</summary>
-		public IEnumerable<Module> Modules
+        public bool Is64 { get; internal set; } = true;
+
+        /// <summary>Gets a copy of the current modules list. This list may change if the remote process (un)loads a module.</summary>
+        public IEnumerable<Module> Modules
 		{
 			get
 			{
