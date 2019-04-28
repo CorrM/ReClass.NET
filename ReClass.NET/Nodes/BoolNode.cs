@@ -47,7 +47,7 @@ namespace ReClassNET.Nodes
 
         public override Size DrawCompare(ViewInfo view, int x, int y)
         {
-            if (IsHidden)
+            if (IsHidden && !view.ShowOptions.ShowHidden)
             {
                 return DrawHidden(view, x, y);
             }
@@ -79,7 +79,7 @@ namespace ReClassNET.Nodes
 
         public override int CalculateDrawnHeight(ViewInfo view)
 		{
-			return IsHidden ? HiddenHeight : view.Font.Height;
+			return IsHidden && !view.ShowOptions.ShowHidden ? HiddenHeight : view.Font.Height;
 		}
 
 		/// <summary>Updates the node from the given spot and sets the value.</summary>

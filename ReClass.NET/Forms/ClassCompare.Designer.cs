@@ -44,7 +44,7 @@
             this.PointerCheck = new System.Windows.Forms.CheckBox();
             this.ViewTypeBox = new System.Windows.Forms.ComboBox();
             this.ShowHexBox = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.ShowHiddenBox = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.bannerBox)).BeginInit();
@@ -217,16 +217,16 @@
             this.ShowHexBox.UseVisualStyleBackColor = true;
             this.ShowHexBox.CheckedChanged += new System.EventHandler(this.ShowHexBox_CheckedChanged);
             // 
-            // checkBox2
+            // ShowHiddenBox
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Enabled = false;
-            this.checkBox2.Location = new System.Drawing.Point(522, 76);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(82, 17);
-            this.checkBox2.TabIndex = 10;
-            this.checkBox2.Text = "Nothing Yet";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.ShowHiddenBox.AutoSize = true;
+            this.ShowHiddenBox.Location = new System.Drawing.Point(522, 76);
+            this.ShowHiddenBox.Name = "ShowHiddenBox";
+            this.ShowHiddenBox.Size = new System.Drawing.Size(88, 17);
+            this.ShowHiddenBox.TabIndex = 10;
+            this.ShowHiddenBox.Text = "Show Hidden";
+            this.ShowHiddenBox.UseVisualStyleBackColor = true;
+            this.ShowHiddenBox.CheckedChanged += new System.EventHandler(this.ShowHiddenBox_CheckedChanged);
             // 
             // checkBox1
             // 
@@ -257,7 +257,7 @@
             this.ClientSize = new System.Drawing.Size(704, 450);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.ShowHiddenBox);
             this.Controls.Add(this.ShowHexBox);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.LayoutPanel);
@@ -297,7 +297,7 @@
         private System.Windows.Forms.ComboBox ViewTypeBox;
         private System.Windows.Forms.CheckBox PointerCheck;
         private System.Windows.Forms.CheckBox ShowHexBox;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox ShowHiddenBox;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox3;
     }

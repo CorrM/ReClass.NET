@@ -88,7 +88,7 @@ namespace ReClassNET.Nodes
         {
             var viewType = (MemoryCompareControl.ViewTypes)view.Tag;
             var otherViews = (List<MemoryBuffer>)view.Tag2;
-            if (IsHidden)
+            if (IsHidden && !view.ShowOptions.ShowHidden)
             {
                 return DrawHidden(view, x, y);
             }
@@ -157,7 +157,7 @@ namespace ReClassNET.Nodes
 
         public override int CalculateDrawnHeight(ViewInfo view)
 		{
-			if (IsHidden)
+			if (IsHidden && !view.ShowOptions.ShowHidden)
 			{
 				return HiddenHeight;
 			}

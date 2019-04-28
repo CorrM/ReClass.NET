@@ -10,5 +10,6 @@ namespace ReClassNET.UI
     {
         public bool ComparePointer { get; set; }
         public bool ShowHex { get; set; }
+        public bool ShowHidden { get; set; }
     }
 }

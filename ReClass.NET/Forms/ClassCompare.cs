@@ -85,6 +85,14 @@ namespace ReClassNET.Forms
             GlobalWindowManager.RemoveWindow(this);
         }
 
+        private void ExecAllViewBox(Action<MemoryCompareControl> action)
+        {
+            foreach (var item in CompareItems.Select(i => i.ViewBox))
+            {
+                action?.Invoke(item);
+            }
+        }
+
         private void ClassCompare_Load(object sender, EventArgs e)
         {
             ClassBox.SelectedIndex = 0;
@@ -233,10 +241,12 @@ namespace ReClassNET.Forms
 
         private void ShowHexBox_CheckedChanged(object sender, EventArgs e)
         {
-            foreach (var item in CompareItems.Select(i => i.ViewBox))
-            {
-                item.ShowOptions.ShowHex = ShowHexBox.Checked;
-            }
+            ExecAllViewBox(item => item.ShowOptions.ShowHex = ShowHexBox.Checked);
+        }
+
+        private void ShowHiddenBox_CheckedChanged(object sender, EventArgs e)
+        {
+            ExecAllViewBox(item => item.ShowOptions.ShowHidden = ShowHiddenBox.Checked);
         }
     }
 }

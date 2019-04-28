@@ -62,7 +62,7 @@ namespace ReClassNET.Nodes
             Contract.Requires(type != null);
             Contract.Requires(value != null);
 
-            if (IsHidden)
+            if (IsHidden && !view.ShowOptions.ShowHidden)
             {
                 return DrawHidden(view, x, y);
             }
@@ -97,7 +97,7 @@ namespace ReClassNET.Nodes
 
         public override int CalculateDrawnHeight(ViewInfo view)
 		{
-			return IsHidden ? HiddenHeight : view.Font.Height;
+			return IsHidden && !view.ShowOptions.ShowHidden ? HiddenHeight : view.Font.Height;
 		}
 	}
 }
