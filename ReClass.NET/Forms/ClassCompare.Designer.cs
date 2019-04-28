@@ -92,7 +92,7 @@
             this.addressPanel.Controls.Add(this.Box1);
             this.addressPanel.Location = new System.Drawing.Point(10, 96);
             this.addressPanel.Name = "addressPanel";
-            this.addressPanel.Size = new System.Drawing.Size(685, 45);
+            this.addressPanel.Size = new System.Drawing.Size(506, 45);
             this.addressPanel.TabIndex = 1;
             // 
             // Box2

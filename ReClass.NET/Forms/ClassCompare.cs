@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Linq;
@@ -38,14 +39,18 @@ namespace ReClassNET.Forms
                 Name = "ViewBox1",
                 Dock = DockStyle.Fill,
                 Memory = new MemoryBuffer() { Process = Program.RemoteProcess },
-                ShowOptions = new CompareOptions()
+                ShowOptions = new CompareOptions(),
+                AutoScroll = false,
+                AutoSize = false
             };
             var ViewBox2 = new MemoryCompareControl()
             {
                 Name = "ViewBox2",
                 Dock = DockStyle.Fill,
                 Memory = new MemoryBuffer() { Process = Program.RemoteProcess },
-                ShowOptions = new CompareOptions()
+                ShowOptions = new CompareOptions(),
+                AutoScroll = false,
+                AutoSize = false
             };
 
             // Events
@@ -85,6 +90,7 @@ namespace ReClassNET.Forms
             GlobalWindowManager.RemoveWindow(this);
         }
 
+        [DebuggerStepThrough]
         private void ExecAllViewBox(Action<MemoryCompareControl> action)
         {
             foreach (var item in CompareItems.Select(i => i.ViewBox))
@@ -179,13 +185,18 @@ namespace ReClassNET.Forms
 
         private void tableLayoutPanel1_Scroll(object sender, ScrollEventArgs e)
         {
-            foreach (var item in LayoutPanel.Panel.Controls.OfType<MemoryCompareControl>().ToArray())
+            ExecAllViewBox(item =>
             {
-                if (e.ScrollOrientation == ScrollOrientation.VerticalScroll)
-                    item.VerticalScroll.Value = e.NewValue;
-                else if (e.ScrollOrientation == ScrollOrientation.HorizontalScroll)
-                    item.HorizontalScroll.Value = e.NewValue;
-            }
+                switch (e.ScrollOrientation)
+                {
+                    case ScrollOrientation.HorizontalScroll:
+                        item.HorizontalScroll.Value = e.NewValue;
+                        break;
+                    case ScrollOrientation.VerticalScroll:
+                        item.VerticalScroll.Value = e.NewValue;
+                        break;
+                }
+            });
         }
 
         private void ClassBox_SelectedIndexChanged(object sender, EventArgs e)
